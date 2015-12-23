@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Firebase Application</title>
+  <link rel="stylesheet" href="assets/css/main.min.css">
+
+  <script>
+    var baseUrl = '//firebase.';
+    window.config = {
+      baseUrl: baseUrl
+    };
+  </script>
+</head>
+<body ng-controller="AppController as app">
+
+  <h1>firebase app</h1>
+
+  <div ui-view="header"></div>
+  <div ui-view="content"></div>
+  <div ui-view="footer"></div>
+
+  <script src="assets/js/main.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</body>
+</html>
