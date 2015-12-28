@@ -9,7 +9,9 @@ define(
   'slick',
   'app-config',
   'templates',
-  'controllers/home'
+  'controllers/home',
+  'controllers/nav',
+  'services/firebase'
   ],
   function(angular) {
     angular
@@ -18,7 +20,9 @@ define(
       'ngSanitize',
       'App.Templates',
       'App.Config',
-      'App.Controller.Home'
+      'App.Controller.Home',
+      'App.Controller.Nav',
+      'App.Service.Firebase'
     ])
     .controller('AppController', appCtrl);
 

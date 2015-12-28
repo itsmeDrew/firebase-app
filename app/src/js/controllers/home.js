@@ -12,10 +12,7 @@ define(
     function HomeController($stateParams, $state, $scope) {
       var vm = this;
 
-      console.log($state);
-      console.log($stateParams);
-
-
+      console.log('home ctrl here');
     }
 
   }

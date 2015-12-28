@@ -22,7 +22,8 @@ define(
               templateUrl: 'partials/_header.html'
             },
             'nav@home': {
-              templateUrl: 'partials/_nav.html'
+              templateUrl: 'partials/_nav.html',
+              controller: 'NavController'
             },
             'content': {
               templateUrl: 'templates/home.tpl.html',
