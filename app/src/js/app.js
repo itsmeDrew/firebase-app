@@ -29,14 +29,60 @@ define(
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $state, $rootScope, $firebaseArray) {
+    function appCtrl($scope, $state, $rootScope, $firebaseArray, $firebaseAuth) {
       var vm = this;
+      var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
+      var data = new Firebase(baseDataURL);
+      var dataSets = new Firebase(baseDataURL + 'setsAvailable/');
+      var auth = $firebaseAuth(data);
 
-      var dataSets = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/');
+      vm.login = login;
+      vm.loggedIn = false;
 
      $scope.sets = $firebaseArray(dataSets);
 
-     console.log($scope.sets[0]);
+      function login() {
+
+        data.authWithOAuthPopup("facebook", authHandler);
+
+
+        function authHandler(error, authData) {
+           if (error) {
+             console.log("Login Failed!", error);
+           } else {
+             console.log("Authenticated successfully with payload:", authData);
+
+             data.onAuth(function(authData) {
+               var _userList = data.child("users");
+               var _userId = authData.uid;
+
+               _userList.once('value', function(snapshot) {
+                 if (authData && !snapshot.hasChild(_userId)) {
+                   console.log('setting new user');
+                   _userList.child(_userId).set({
+                     provider: authData.provider,
+                     name: getName(authData),
+                     userID: _userId
+                   });
+                 } else {
+                   console.log('already have an accnt');
+                 }
+               });
+             });
+
+             function getName(authData) {
+               switch(authData.provider) {
+                  case 'password':
+                    return authData.password.email.replace(/@.*/, '');
+                  case 'twitter':
+                    return authData.twitter.displayName;
+                  case 'facebook':
+                    return authData.facebook.displayName;
+               }
+             }
+           }
+         }
+      }
 
     }
   }

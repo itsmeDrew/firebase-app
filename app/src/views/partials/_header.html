@@ -1,4 +1,6 @@
 <header>
   <h2>header here</h2>
+  <button ng-if="!app.loggedIn" ng-click="app.login()">login with facebook</button>
+  <p>Logged in as {{ app.authData.facebook.displayName }}</p>
 </header>
 <div ui-view="nav"></div>
