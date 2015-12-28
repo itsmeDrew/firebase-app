@@ -13,8 +13,7 @@ define(
   'templates',
   'controllers/home',
   'controllers/login',
-  'controllers/nav',
-  'services/login'
+  'controllers/nav'
   ],
   function(angular) {
     angular
@@ -26,8 +25,7 @@ define(
       'App.Config',
       'App.Controller.Home',
       'App.Controller.Login',
-      'App.Controller.Nav',
-      'App.Service.Login'
+      'App.Controller.Nav'
     ])
     .controller('AppController', appCtrl);
 
