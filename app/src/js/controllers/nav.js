@@ -9,11 +9,9 @@ define(
       .module('App.Controller.Nav', [])
       .controller('NavController', NavController);
 
-    function NavController($stateParams, $state, $scope, Firebase) {
+    function NavController($stateParams, $state, $scope) {
       var vm = this;
       console.log('nav ctrl here');
-
-      Firebase.getData();
     }
 
   }

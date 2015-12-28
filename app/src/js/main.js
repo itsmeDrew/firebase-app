@@ -3,6 +3,8 @@
 require.config({
   paths: {
     angular: '../../../bower_components/angular/angular',
+    firebase: '../../../bower_components/firebase/firebase',
+    angularfire: '../../../bower_components/angularfire/dist/angularfire',
     almond: '../../../bower_components/almond/almond',
     jquery: '../../../bower_components/jquery/dist/jquery',
     uiRouter: '../../../bower_components/angular-ui-router/release/angular-ui-router',
@@ -15,6 +17,7 @@ require.config({
       exports: 'angular',
       deps: [ 'jquery' ]
     },
+    angularfire: ['angular', 'firebase'],
     ngSanitize: [ 'angular' ],
     uiRouter: [ 'angular' ]
   },
