@@ -9,19 +9,19 @@ define(
   ],
   function(angular) {
     angular
-      .module('App.Service.Users', ['firebase'])
-      .service('Users', Users);
+      .module('App.Service.Login', ['firebase'])
+      .service('Login', Login);
 
-      function Users($firebaseAuth) {
+      function Login($firebaseAuth) {
         var vm = this;
         var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
         var data = new Firebase(baseDataURL);
         var auth = $firebaseAuth(data);
 
-        vm.login = login;
+        vm.loginWithFacebook = loginWithFacebook;
         vm.loggedIn = false;
 
-        function login() {
+        function loginWithFacebook() {
           data.authWithOAuthPopup("facebook", authHandler);
         }
 

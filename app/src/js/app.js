@@ -12,8 +12,9 @@ define(
   'app-config',
   'templates',
   'controllers/home',
+  'controllers/login',
   'controllers/nav',
-  'services/users'
+  'services/login'
   ],
   function(angular) {
     angular
@@ -24,24 +25,18 @@ define(
       'App.Templates',
       'App.Config',
       'App.Controller.Home',
+      'App.Controller.Login',
       'App.Controller.Nav',
-      'App.Service.Users'
+      'App.Service.Login'
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $state, $rootScope, $firebaseArray, Users) {
+    function appCtrl($scope, $state, $rootScope, $firebaseArray) {
       var vm = this;
       var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
       var dataSets = new Firebase(baseDataURL + 'setsAvailable/');
 
-      vm.login = login;
-
-      function login() {
-        Users.login();
-      }
-
-     $scope.sets = $firebaseArray(dataSets);
-
+      $scope.sets = $firebaseArray(dataSets);
 
     }
   }

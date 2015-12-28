@@ -1,6 +1,6 @@
-<header>
+<header  ng-controller="LoginController as user">
   <h2>header here</h2>
-  <button ng-if="!app.loggedIn" ng-click="app.login()">login with facebook</button>
-  <p>Logged in as {{ app.authData.facebook.displayName }}</p>
+  <button ng-if="!user.loggedIn" ng-click="user.login()">login with facebook</button>
+  <p>Logged in as {{ app.Users.userName }}</p>
 </header>
 <div ui-view="nav"></div>
