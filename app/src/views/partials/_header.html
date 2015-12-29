@@ -1,6 +1,8 @@
 <header  ng-controller="LoginController as user">
   <h2>header here</h2>
-  <button ng-show="!user.loggedIn" ng-click="user.login()">login with facebook</button>
-  <p>Logged in as {{ user.userName }}</p>
+  <button ng-click="user.login()">login with facebook</button>
+  <button ng-click="user.logout()">logout</button>
+  <p ng-if="user.userName">Logged in as {{ user.userName }}</p>
+  <img src="{{ user.profilePic }}" alt="">
 </header>
 <div ui-view="nav"></div>

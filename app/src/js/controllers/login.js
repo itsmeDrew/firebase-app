@@ -18,33 +18,42 @@ define(
       var auth = $firebaseAuth(data);
 
       vm.login = loginWithFacebook;
+      vm.logout = logoutFacebook;
       vm.loggedIn = false;
-      vm.userName = 'Bob';
+      vm.userName = '';
+      vm.profilePic = '';
+
+      console.log(auth);
+
+      data.onAuth(function(authData) {
+        if (authData) {
+          vm.userName = authData.facebook.displayName;
+          vm.profilePic = authData.facebook.profileImageURL;
+          vm.loggedIn = true;
+
+          console.log("Authenticated with:", authData);
+        } else {
+          console.log("Client unauthenticated.")
+        }
+      });
 
       function loginWithFacebook() {
         data.authWithOAuthPopup("facebook", authHandler);
       }
 
-      function authHandler(error, authData) {
-        vm.loggedIn = true;
-        vm.userName = 'Drew';
+      function logoutFacebook() {
+        vm.userName = '';
+        vm.profilePic = '';
+        data.unauth();
+      }
 
+      function authHandler(error, authData) {
         if (error) {
           alert("Login Failed!", error);
         } else {
-          data.onAuth(function(authData) {
-            var _userList = data.child("users");
-            var _userId = authData.uid;
-
-            _userList.once('value', function(snapshot) {
-              if (authData && !snapshot.hasChild(_userId) && !vm.loggedIn) {
-               console.log('new user: ', authData);
-               setNewUser(_userList, _userId, authData);
-              }
-            });
-          });
+          console.log('reloading');
+          $state.go($state.current, {}, {reload: true});
          }
-
        }
 
        function getName(authData) {
