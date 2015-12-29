@@ -11,8 +11,10 @@ define(
 
     function HomeController($stateParams, $state, $scope) {
       var vm = this;
+      vm.userName = $stateParams.userName;
+      vm.loggedIn = $stateParams.loggedIn;
 
-      console.log('home ctrl here');
+      console.log('home ctrl here', $stateParams);
     }
 
   }

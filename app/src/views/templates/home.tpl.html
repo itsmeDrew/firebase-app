@@ -1,5 +1,13 @@
 <h2>home tpl here!</h2>
 
-<ul>
-  <li ng-repeat="set in sets">{{ set.name }} has {{ set.cards }} cards <input type="text" ng-model="set.cards" ng-change="sets.$save(set)" /></li>
-</ul>
+<!-- USER LOGGED IN -->
+<div ng-show="app.loggedIn" class="logged-in">
+  <h2>Logged in information</h2>
+
+  <ul>
+    <li ng-repeat="set in sets">
+      <p>{{ set.name }} has {{ set.cards }} cards</p>
+      <p>I have</p>
+    </li>
+  </ul>
+</div>
