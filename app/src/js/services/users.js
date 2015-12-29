@@ -17,6 +17,18 @@ define(
 
       vm.authHandler = authHandler;
       vm.checkAuth = checkAuth;
+      vm.loginWithFacebook = loginWithFacebook
+
+      function loginWithFacebook(auth, ref) {
+        auth.$authWithOAuthPopup("facebook").then(function(authData) {
+          if (authData) {
+            authHandler(ref);
+            console.log("Authenticated with:", authData);
+          }
+        }).catch(function(error) {
+          console.log("Authentication failed:", error);
+        });
+      }
 
       function authHandler(ref) {
         ref.onAuth(function(authData) {
@@ -29,11 +41,11 @@ define(
               var _userId = authData.uid;
 
               if (authData && !snapshot.hasChild(_userId) && !vm.authenticated) {
-                console.log('new user:');
+                console.log('new user');
                 setNewUser(_userList, _userId, authData);
                 vm.authenticated = true;
               } else if (authData && snapshot.hasChild(_userId) && !vm.authenticated) {
-                console.log('returning user:');
+                console.log('returning user');
                 vm.authenticated = true;
               }
             });

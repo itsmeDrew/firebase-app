@@ -11,7 +11,6 @@ define(
 
     function NavController($stateParams, $state, $scope) {
       var vm = this;
-      console.log('nav ctrl here');
     }
 
   }

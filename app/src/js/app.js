@@ -42,22 +42,13 @@ define(
       vm.user = '';
 
       cardSets.$bindTo($scope, 'sets');
-      console.log($scope);
 
       ref.onAuth(function(authData) {
         setUser();
       });
 
       function login() {
-        // login with Facebook
-        auth.$authWithOAuthPopup("facebook").then(function(authData) {
-          if (authData) {
-            Users.authHandler(ref);
-            console.log("Authenticated with:", authData);
-          }
-        }).catch(function(error) {
-          console.log("Authentication failed:", error);
-        });
+        Users.loginWithFacebook(auth, ref);
       }
 
       function logout() {
@@ -68,8 +59,6 @@ define(
 
       function setUser() {
         var authData = Users.checkAuth(ref);
-
-        console.log('set user data');
 
         if (authData) {
           vm.user = authData.facebook;
