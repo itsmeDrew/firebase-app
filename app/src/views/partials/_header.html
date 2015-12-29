@@ -1,8 +1,8 @@
 <header>
   <h2>header here</h2>
-  <button ng-show="!app.loggedIn" ng-click="app.login()">login with facebook</button>
-  <button ng-click="app.logout()">logout</button>
-  <p ng-if="app.loggedIn">Logged in as {{ app.userName }}</p>
-  <img src="{{ app.profilePic }}" alt="">
+  <button ng-show="!app.user" ng-click="app.login()">login with facebook</button>
+  <button ng-show="app.user" ng-click="app.logout()">logout</button>
+  <p ng-show="app.user">Logged in as {{ app.user.displayName }}</p>
+  <img src="{{ app.user.profileImageURL }}" alt="">
 </header>
 <div ui-view="nav"></div>

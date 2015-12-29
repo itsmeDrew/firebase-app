@@ -13,7 +13,7 @@ define(
     'templates',
     'controllers/home',
     'controllers/nav',
-    'services/Users'
+    'services/users'
   ],
   function(angular) {
     angular
@@ -29,81 +29,53 @@ define(
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $state, $stateParams, $rootScope, $firebaseArray, $firebaseAuth, Users) {
+    function appCtrl($scope, $state, $stateParams, $rootScope, $firebaseObject, $firebaseArray, $firebaseAuth, Users) {
       var vm = this;
       var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
-      var dataSets = new Firebase(baseDataURL + 'setsAvailable/');
-      var data = new Firebase(baseDataURL);
+      var ref = new Firebase(baseDataURL);
+      var setsURL = new Firebase(baseDataURL + 'setsAvailable/');
+      var cardSets = $firebaseObject(setsURL);
+      var auth = $firebaseAuth(ref);
 
-      vm.login = loginWithFacebook;
-      vm.logout = logoutFacebook;
-      vm.loggedIn = false;
-      vm.userName = '';
-      vm.profilePic = '';
-      vm.sets = $firebaseArray(dataSets);
+      vm.login = login;
+      vm.logout = logout
+      vm.user = '';
 
-      function loginWithFacebook() {
-        data.authWithOAuthPopup("facebook", authHandler);
+      cardSets.$bindTo($scope, 'sets');
+      console.log($scope);
 
-        data.onAuth(function(authData) {
-          var _userList = data.child("users");
+      ref.onAuth(function(authData) {
+        setUser();
+      });
 
-          _userList.once('value', function(snapshot) {
-            var _userId = authData.uid;
-
-            if (authData && !snapshot.hasChild(_userId)) {
-              vm.userName = authData.facebook.displayName;
-              vm.profilePic = authData.facebook.profileImageURL;
-
-              console.log('new user: ', authData);
-              setNewUser(_userList, _userId, authData);
-            } else if (authData && snapshot.hasChild(_userId)) {
-              vm.userName = authData.facebook.displayName;
-              vm.profilePic = authData.facebook.profileImageURL;
-
-              console.log('returning user: ', authData);
-            } else {
-              console.log("Client unauthenticated.");
-            }
-          });
+      function login() {
+        // login with Facebook
+        auth.$authWithOAuthPopup("facebook").then(function(authData) {
+          if (authData) {
+            Users.authHandler(ref);
+            console.log("Authenticated with:", authData);
+          }
+        }).catch(function(error) {
+          console.log("Authentication failed:", error);
         });
       }
 
-      function logoutFacebook() {
-        vm.userName = '';
-        vm.profilePic = '';
-        vm.loggedIn = false;
-
-        data.unauth();
+      function logout() {
+        ref.unauth();
+        vm.user = '';
         $state.go($state.current, {}, {reload: true});
       }
 
-      function authHandler(error, authData) {
-        if (error) {
-          alert("Login Failed!", error);
-        } else {
-          $state.go($state.current, {}, {reload: true});
+      function setUser() {
+        var authData = Users.checkAuth(ref);
+
+        console.log('set user data');
+
+        if (authData) {
+          vm.user = authData.facebook;
         }
       }
 
-      function setNewUser(list, userId, authData) {
-        list.child(userId).set({
-          provider: authData.provider,
-          name: getName(authData),
-          userID: userId
-        });
-      }
-
-      function getName(authData) {
-        switch(authData.provider) {
-          case 'password':
-          return authData.password.email.replace(/@.*/, '');
-          case 'twitter':
-          return authData.twitter.displayName;
-          case 'facebook':
-          return authData.facebook.displayName;
-        }
-      }
 
     }
   }

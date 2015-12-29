@@ -8,16 +8,66 @@ define(
   ],
   function(angular) {
     angular
-      .module('App.Service.Users', ['firebase'])
-      .service('Users', UserController);
+    .module('App.Service.Users', ['firebase'])
+    .service('Users', UserController);
 
     function UserController() {
       var vm = this;
-      vm.getName = getName;
+      // var ref = new Firebase('https://mypokemonclub.firebaseio.com/');
 
-      function getName() {
-        console.log('getting name');
+      vm.authHandler = authHandler;
+      vm.checkAuth = checkAuth;
+
+      function authHandler(ref) {
+        ref.onAuth(function(authData) {
+          if (authData) {
+            var _userList = ref.child("users");
+
+            vm.authenticated = false;
+
+            _userList.once('value', function(snapshot) {
+              var _userId = authData.uid;
+
+              if (authData && !snapshot.hasChild(_userId) && !vm.authenticated) {
+                console.log('new user:');
+                setNewUser(_userList, _userId, authData);
+                vm.authenticated = true;
+              } else if (authData && snapshot.hasChild(_userId) && !vm.authenticated) {
+                console.log('returning user:');
+                vm.authenticated = true;
+              }
+            });
+          }
+        });
       }
+
+      function setNewUser(list, userId, authData) {
+        list.child(userId).set({
+          provider: authData.provider,
+          name: getName(authData),
+          userID: userId
+        });
+      }
+
+      function getName(authData) {
+        switch(authData.provider) {
+          case 'password':
+          return authData.password.email.replace(/@.*/, '');
+          case 'twitter':
+          return authData.twitter.displayName;
+          case 'facebook':
+          return authData.facebook.displayName;
+        }
+      }
+
+      function checkAuth(ref) {
+        var authData = ref.getAuth();
+
+        if (authData) {
+          return authData;
+        }
+      }
+
     }
 
   }

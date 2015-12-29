@@ -1,11 +1,11 @@
 <h2>home tpl here!</h2>
 
 <!-- USER LOGGED IN -->
-<div ng-show="app.loggedIn" class="logged-in">
+<div ng-show="app.user" class="logged-in">
   <h2>Logged in information</h2>
 
   <ul>
-    <li ng-repeat="set in app.sets">
+    <li ng-repeat="set in sets">
       <p>{{ set.name }} has {{ set.cards }} cards</p>
       <p>I have</p>
     </li>
