@@ -19,9 +19,7 @@ define(
           url: '/',
           views: {
             'header': {
-              templateUrl: 'partials/_header.html',
-              controller: 'LoginController',
-              controllerAs: 'user'
+              templateUrl: 'partials/_header.html'
             },
             'nav@home': {
               templateUrl: 'partials/_nav.html',

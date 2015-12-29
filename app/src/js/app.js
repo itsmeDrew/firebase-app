@@ -2,17 +2,18 @@
 
 define(
   [
-  'angular',
-  'firebase',
-  'angularfire',
-  'ngSanitize',
-  'uiRouter',
-  'jquery',
-  'slick',
-  'app-config',
-  'templates',
-  'controllers/home',
-  'controllers/nav'
+    'angular',
+    'firebase',
+    'angularfire',
+    'ngSanitize',
+    'uiRouter',
+    'jquery',
+    'slick',
+    'app-config',
+    'templates',
+    'controllers/home',
+    'controllers/nav',
+    'services/Users'
   ],
   function(angular) {
     angular
@@ -23,43 +24,49 @@ define(
       'App.Templates',
       'App.Config',
       'App.Controller.Home',
-      'App.Controller.Nav'
+      'App.Controller.Nav',
+      'App.Service.Users'
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $state, $stateParams, $rootScope, $firebaseArray, $firebaseAuth) {
+    function appCtrl($scope, $state, $stateParams, $rootScope, $firebaseArray, $firebaseAuth, Users) {
       var vm = this;
       var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
       var dataSets = new Firebase(baseDataURL + 'setsAvailable/');
       var data = new Firebase(baseDataURL);
-      var auth = $firebaseAuth(data);
 
       vm.login = loginWithFacebook;
       vm.logout = logoutFacebook;
       vm.loggedIn = false;
       vm.userName = '';
       vm.profilePic = '';
-
-      $scope.sets = $firebaseArray(dataSets);
-
-      data.onAuth(function(authData) {
-        if (authData) {
-          vm.userName = authData.facebook.displayName;
-          vm.profilePic = authData.facebook.profileImageURL;
-          vm.loggedIn = true;
-
-          vm.userName = authData.facebook.displayName;
-          vm.userId = authData.uid;
-          vm.loggedIn = true;
-
-          console.log("Authenticated with:", authData);
-        } else {
-          console.log("Client unauthenticated.")
-        }
-      });
+      vm.sets = $firebaseArray(dataSets);
 
       function loginWithFacebook() {
         data.authWithOAuthPopup("facebook", authHandler);
+
+        data.onAuth(function(authData) {
+          var _userList = data.child("users");
+
+          _userList.once('value', function(snapshot) {
+            var _userId = authData.uid;
+
+            if (authData && !snapshot.hasChild(_userId)) {
+              vm.userName = authData.facebook.displayName;
+              vm.profilePic = authData.facebook.profileImageURL;
+
+              console.log('new user: ', authData);
+              setNewUser(_userList, _userId, authData);
+            } else if (authData && snapshot.hasChild(_userId)) {
+              vm.userName = authData.facebook.displayName;
+              vm.profilePic = authData.facebook.profileImageURL;
+
+              console.log('returning user: ', authData);
+            } else {
+              console.log("Client unauthenticated.");
+            }
+          });
+        });
       }
 
       function logoutFacebook() {
@@ -67,7 +74,6 @@ define(
         vm.profilePic = '';
         vm.loggedIn = false;
 
-        vm.loggedIn = false;
         data.unauth();
         $state.go($state.current, {}, {reload: true});
       }
@@ -76,29 +82,28 @@ define(
         if (error) {
           alert("Login Failed!", error);
         } else {
-          console.log('reloading');
           $state.go($state.current, {}, {reload: true});
-         }
-       }
+        }
+      }
 
-       function getName(authData) {
-         switch(authData.provider) {
-           case 'password':
-             return authData.password.email.replace(/@.*/, '');
-           case 'twitter':
-             return authData.twitter.displayName;
-           case 'facebook':
-             return authData.facebook.displayName;
-         }
-       }
+      function setNewUser(list, userId, authData) {
+        list.child(userId).set({
+          provider: authData.provider,
+          name: getName(authData),
+          userID: userId
+        });
+      }
 
-       function setNewUser(list, userId, authData) {
-         list.child(userId).set({
-           provider: authData.provider,
-           name: getName(authData),
-           userID: userId
-         });
-       }
+      function getName(authData) {
+        switch(authData.provider) {
+          case 'password':
+          return authData.password.email.replace(/@.*/, '');
+          case 'twitter':
+          return authData.twitter.displayName;
+          case 'facebook':
+          return authData.facebook.displayName;
+        }
+      }
 
     }
   }
