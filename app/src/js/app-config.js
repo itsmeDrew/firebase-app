@@ -15,13 +15,13 @@ define(
       $urlRouterProvider.otherwise('/');
 
       $stateProvider
-        .state('home', {
+        .state('app', {
           url: '/',
           views: {
             'header': {
               templateUrl: 'partials/_header.html'
             },
-            'nav@home': {
+            'nav@app': {
               templateUrl: 'partials/_nav.html',
               controller: 'NavController'
             },
@@ -32,6 +32,16 @@ define(
             },
             'footer': {
               templateUrl: 'partials/_footer.html'
+            }
+          }
+        })
+        .state('app.category', {
+          url: 'sets',
+          views: {
+            'content@': {
+              templateUrl: 'templates/category.tpl.html',
+              controller: 'CategoryController',
+              controllerAs: 'cat'
             }
           }
         });
