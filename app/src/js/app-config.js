@@ -44,6 +44,16 @@ define(
               controllerAs: 'cat'
             }
           }
+        })
+        .state('app.set', {
+          url: 'sets/:setSlug',
+          views: {
+            'content@': {
+              templateUrl: 'templates/set.tpl.html',
+              controller: 'SetController',
+              controllerAs: 'set'
+            }
+          }
         });
     }
 

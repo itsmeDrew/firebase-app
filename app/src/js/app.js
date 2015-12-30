@@ -13,6 +13,9 @@ define(
     'templates',
     'controllers/home',
     'controllers/nav',
+    'controllers/category',
+    'controllers/sets',
+    'services/sets',
     'services/users'
   ],
   function(angular) {
@@ -25,11 +28,14 @@ define(
       'App.Config',
       'App.Controller.Home',
       'App.Controller.Nav',
+      'App.Controller.Category',
+      'App.Controller.Sets',
+      'App.Service.Sets',
       'App.Service.Users'
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $state, $stateParams, $rootScope, $firebaseObject, $firebaseArray, $firebaseAuth, Users) {
+    function appCtrl($scope, $firebaseObject, $firebaseAuth, Users, Sets) {
       var vm = this;
       var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
       var ref = new Firebase(baseDataURL);
@@ -40,8 +46,13 @@ define(
       vm.login = login;
       vm.logout = logout
       vm.user = '';
+      vm.setCards = false; //dev
 
       cardSets.$bindTo($scope, 'sets');
+
+      if (vm.setCards) {
+        Sets.setCardData(ref);
+      }
 
       ref.onAuth(function(authData) {
         setUser();
