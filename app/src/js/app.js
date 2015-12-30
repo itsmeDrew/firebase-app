@@ -35,7 +35,7 @@ define(
     ])
     .controller('AppController', appCtrl);
 
-    function appCtrl($scope, $firebaseObject, $firebaseAuth, Users, Sets) {
+    function appCtrl($scope, $state, $firebaseObject, $firebaseAuth, Users, Sets) {
       var vm = this;
       var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
       var ref = new Firebase(baseDataURL);
@@ -46,7 +46,7 @@ define(
       vm.login = login;
       vm.logout = logout
       vm.user = '';
-      vm.setCards = false; //dev
+      vm.setCards = true; //dev
 
       cardSets.$bindTo($scope, 'sets');
 

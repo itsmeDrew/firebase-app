@@ -11,6 +11,9 @@ define(
 
     function SetController($stateParams, $state, $scope) {
       var vm = this;
+      vm.setName = $stateParams.setName;
+
+      console.log($stateParams);
     }
 
   }

@@ -25,6 +25,7 @@ define(
         genData('200', 'legendary treasures', '2013', _setRef);
         genData('98', 'roaring skies', '2014', _setRef);
         genData('146', 'furious fists', '2014', _setRef);
+        genData('99', 'plasma blast', '2012', _setRef);
       }
 
       function genSlug(data) {
