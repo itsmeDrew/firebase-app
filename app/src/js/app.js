@@ -15,6 +15,7 @@ define(
     'controllers/nav',
     'controllers/category',
     'controllers/sets',
+    'controllers/admin',
     'services/sets',
     'services/users'
   ],
@@ -30,6 +31,7 @@ define(
       'App.Controller.Nav',
       'App.Controller.Category',
       'App.Controller.Sets',
+      'App.Controller.Admin',
       'App.Service.Sets',
       'App.Service.Users'
     ])

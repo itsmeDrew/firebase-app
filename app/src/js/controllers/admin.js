@@ -8,10 +8,10 @@ define(
   ],
   function(angular) {
     angular
-      .module('App.Controller.Category', [])
-      .controller('CategoryController', CategoryController);
+      .module('App.Controller.Admin', [])
+      .controller('AdminController', AdminController);
 
-    function CategoryController($stateParams, $state, $scope) {
+    function AdminController($stateParams, $state, $scope) {
       var vm = this;
       vm.setSlug = $stateParams.setSlug;
     }

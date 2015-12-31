@@ -74,10 +74,15 @@ define(
 
       function checkAuth(ref) {
         var authData = ref.getAuth();
+        // var isAdmin = checkAdmin(authData);
 
         if (authData) {
           return authData;
         }
+      }
+
+      function isAdmin(authData) {
+        if(authData.uid)
       }
 
     }

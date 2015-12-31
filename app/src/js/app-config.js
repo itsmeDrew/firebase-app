@@ -54,6 +54,16 @@ define(
               controllerAs: 'set'
             }
           }
+        })
+        .state('app.admin', {
+          url: 'admin',
+          views: {
+            'content@': {
+              templateUrl: 'templates/admin.tpl.html',
+              controller: 'AdminController',
+              controllerAs: 'admin'
+            }
+          }
         });
     }
 
