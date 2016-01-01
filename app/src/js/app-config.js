@@ -53,7 +53,8 @@ define(
               controller: 'SetController',
               controllerAs: 'set'
             }
-          }
+          },
+          params : { setId: null, },
         });
     }
 

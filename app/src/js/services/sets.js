@@ -26,6 +26,7 @@ define(
         genData('98', 'roaring skies', '2014', _setRef);
         genData('146', 'furious fists', '2014', _setRef);
         genData('99', 'plasma blast', '2012', _setRef);
+        genData('99', 'breakthrough', '2015', _setRef);
       }
 
       function genSlug(data) {
@@ -37,8 +38,11 @@ define(
       }
 
       function genData(cardNumber, name, releaseDate, ref) {
-        ref.push({
+        var newSetRef = ref.push();
+        
+        newSetRef.set({
           name: name,
+          id: newSetRef.key(),
           cardnumber: cardNumber,
           slug: genSlug(name),
           releasedate: releaseDate

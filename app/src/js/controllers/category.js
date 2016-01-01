@@ -12,6 +12,7 @@ define(
     function CategoryController($stateParams, $state, $scope) {
       var vm = this;
       vm.setSlug = $stateParams.setSlug;
+      vm.setId = $stateParams.setId;
     }
 
   }
