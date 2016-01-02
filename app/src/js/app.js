@@ -46,7 +46,7 @@ define(
       vm.login = login;
       vm.logout = logout
       vm.user = '';
-      vm.setCards = true; //dev
+      vm.setCards = false; //dev
 
       cardSets.$bindTo($scope, 'sets');
 

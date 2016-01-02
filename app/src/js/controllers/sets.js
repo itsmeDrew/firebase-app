@@ -11,15 +11,21 @@ define(
       .module('App.Controller.Sets', [])
       .controller('SetController', SetController);
 
-    function SetController($stateParams, $state, $scope, $firebaseObject) {
+    function SetController($stateParams, $state, $scope, $firebaseObject, Sets) {
       var vm = this;
-      var baseDataURL = 'https://mypokemonclub.firebaseio.com/setsAvailable/';
-      var ref = new Firebase(baseDataURL + $stateParams.setId);
-      var setData = $firebaseObject(ref);
+      var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/');
+      // var setData = $firebaseObject(ref);
 
-      vm.currentSet = setData;
+      ref.orderByChild("slug").equalTo($stateParams.setSlug).on("value", function(snapshot) {
+        for (var key in snapshot.val()) {
+          if (snapshot.val().hasOwnProperty(key)) {
+            console.log(snapshot.val()[key]);
+            vm.currentSet = snapshot.val()[key];
 
-      console.log('vm.currentSet', vm.currentSet);
+            break;
+          }
+        }
+      });
 
     }
 

@@ -15,18 +15,19 @@ define(
       var vm = this;
 
       vm.setCardData = setCardData;
+      vm.genCardData = genCardData;
 
       function setCardData(ref) {
-        var _setRef = ref.child('setsAvailable');
+        var _setsRef = ref.child('setsAvailable');
 
-        _setRef.set({});
+        _setsRef.set({});
 
-        genData('150', 'flashfire', '2015', _setRef);
-        genData('200', 'legendary treasures', '2013', _setRef);
-        genData('98', 'roaring skies', '2014', _setRef);
-        genData('146', 'furious fists', '2014', _setRef);
-        genData('99', 'plasma blast', '2012', _setRef);
-        genData('99', 'breakthrough', '2015', _setRef);
+        genSetData('150', 'flashfire', '2015', _setsRef);
+        genSetData('200', 'legendary treasures', '2013', _setsRef);
+        genSetData('98', 'roaring skies', '2014', _setsRef);
+        genSetData('146', 'furious fists', '2014', _setsRef);
+        genSetData('99', 'plasma blast', '2012', _setsRef);
+        genSetData('99', 'breakthrough', '2015', _setsRef);
       }
 
       function genSlug(data) {
@@ -37,16 +38,28 @@ define(
           ;
       }
 
-      function genData(cardNumber, name, releaseDate, ref) {
-        var newSetRef = ref.push();
-        
-        newSetRef.set({
+      function genSetData(numberofcards, name, releaseDate, ref) {
+        var _newSetRef = ref.push();
+
+        _newSetRef.set({
           name: name,
-          id: newSetRef.key(),
-          cardnumber: cardNumber,
+          id: _newSetRef.key(),
+          numberofcards: numberofcards,
           slug: genSlug(name),
           releasedate: releaseDate
         });
+      }
+
+      function genCardData(id, cardnumber, name) {
+        var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + id);
+        var _newSetRef = ref.push();
+
+        console.log('setting card');
+
+        _newSetRef.set({
+          cardnumber: cardnumber,
+          name: name
+        })
       }
 
     }

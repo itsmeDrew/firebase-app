@@ -1,3 +1,15 @@
-<h2>Setname: {{set.currentSet.name}}</h2>
+<h4>Setname: {{set.currentSet.name}}</h4>
+
+<div ng-if="set.currentSet.name">
+  <h4>cards available</h4>
+
+  <ul>
+    <li ng-repeat="card in set.currentSet.cards">{{card.name}}</li>
+  </ul>
+</div>
+<div ng-if="!set.currentSet.name">
+  <h2>click a set to continue!</h2>
+</div>
+
 
 <!-- USER LOGGED IN -->
