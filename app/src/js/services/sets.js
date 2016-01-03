@@ -46,19 +46,27 @@ define(
           id: _newSetRef.key(),
           numberofcards: numberofcards,
           slug: genSlug(name),
-          releasedate: releaseDate
+          releasedate: releaseDate,
+          cards: {
+            '01': {
+              name: 'charizard',
+              cardnumber: '01',
+              slug: genSlug('charizard')
+            }
+          }
         });
       }
 
       function genCardData(id, cardnumber, name) {
         var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + id);
-        var _newSetRef = ref.push();
+        var _newCardRef = ref.push();
 
         console.log('setting card');
 
-        _newSetRef.set({
+        _newCardRef.set({
           cardnumber: cardnumber,
-          name: name
+          name: name,
+          id: _newCardRef.key()
         })
       }
 

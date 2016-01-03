@@ -45,8 +45,8 @@ define(
 
       vm.login = login;
       vm.logout = logout
-      vm.user = '';
-      vm.setCards = false; //dev
+      $scope.user = '';
+      vm.setCards = true; //dev
 
       cardSets.$bindTo($scope, 'sets');
 
@@ -64,7 +64,7 @@ define(
 
       function logout() {
         ref.unauth();
-        vm.user = '';
+        $scope.user = '';
         $state.go($state.current, {}, {reload: true});
       }
 
@@ -72,7 +72,7 @@ define(
         var authData = Users.checkAuth(ref);
 
         if (authData) {
-          vm.user = authData.facebook;
+          $scope.user = authData.facebook;
         }
       }
 

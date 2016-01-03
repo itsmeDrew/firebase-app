@@ -4,7 +4,7 @@
   <h4>cards available</h4>
 
   <ul>
-    <li ng-repeat="card in set.currentSet.cards">{{card.name}}</li>
+    <li ng-repeat="card in set.currentSet.cards">{{card.name}} {{user.hasCard}} <input ng-model="user.hasCard" ng-click="set.saveUserCard(card)" type="checkbox"></li>
   </ul>
 </div>
 <div ng-if="!set.currentSet.name">
