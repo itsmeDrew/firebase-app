@@ -1,31 +1,32 @@
 'use strict';
 
-require.config({
-  paths: {
-    angular: '../../../bower_components/angular/angular',
-    firebase: '../../../bower_components/firebase/firebase',
-    angularfire: '../../../bower_components/angularfire/dist/angularfire',
-    almond: '../../../bower_components/almond/almond',
-    jquery: '../../../bower_components/jquery/dist/jquery',
-    uiRouter: '../../../bower_components/angular-ui-router/release/angular-ui-router',
-    ngSanitize: '../../../bower_components/angular-sanitize/angular-sanitize',
-    slick: '../../../bower_components/slick-carousel/slick/slick',
-  },
-  shim: {
-    slick: [ 'jquery' ],
-    angular: {
-      exports: 'angular',
-      deps: [ 'jquery' ]
-    },
-    angularfire: ['angular', 'firebase'],
-    ngSanitize: [ 'angular' ],
-    uiRouter: [ 'angular' ]
-  },
-  deps: [
-    'angular',
-    'app'
-  ],
-  callback: function(angular) {
-    angular.bootstrap(document, [ 'App' ]);
-  }
-});
+require('angular');
+require('angularfire');
+require('firebase');
+require('angular-ui-router');
+require('./templates');
+
+require('./controllers/HomeCtrl');
+require('./controllers/NavCtrl');
+require('./controllers/CategoryCtrl');
+require('./controllers/SetsCtrl');
+require('./services/sets');
+require('./services/users');
+
+var app = angular.module('App', [
+  'ui.router',
+  'firebase',
+  'templates',
+  'App.Controller.Nav',
+  'App.Controller.Home',
+  'App.Controller.Category',
+  'App.Controller.Sets',
+  'App.Service.Sets',
+  'App.Service.Users'
+]);
+
+app.controller('AppCtrl', require('./controllers/AppCtrl'));
+
+app.constant('App.Config', window.config);
+
+app.config(require('./on_config'));
