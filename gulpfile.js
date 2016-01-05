@@ -2,21 +2,18 @@
 
 var argv = require('yargs').argv;
 var autoprefixer = require('gulp-autoprefixer');
+var browserify = require('gulp-browserify');
 var del = require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
-var ngAnnotate = require('gulp-ng-annotate');
 var ngTemplateCache = require('gulp-angular-templatecache');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
-var rjs = require('requirejs');
 var sass = require('gulp-ruby-sass');
 var uglify = require('gulp-uglifyjs');
 var _distDir = './app/dist';
 var _srcDir = './app/src';
-
-argv.production = false;
 
 gulp.task('clean:public', function (cb) { return del(_distDir + '/assets', cb); });
 gulp.task('clean:fonts', function (cb) { return del(_distDir + '/assets/fonts', cb); });
@@ -29,11 +26,6 @@ gulp.task('copy:fonts', function() {
     .pipe(gulp.dest(_distDir + '/assets/fonts'));
 });
 
-gulp.task('copy:slick-fonts', function() {
-  return gulp.src('./bower_components/slick-carousel/slick/fonts/**/*')
-    .pipe(gulp.dest(_distDir + '/assets/fonts'));
-});
-
 gulp.task('copy:images', function() {
   return gulp.src(_srcDir + '/img/**/*')
     .pipe(gulp.dest(_distDir + '/assets/img'));
@@ -42,8 +34,7 @@ gulp.task('copy:images', function() {
 gulp.task('build:views', function() {
   return gulp.src(_srcDir + '/views/**/*.html')
     .pipe(ngTemplateCache({
-      moduleSystem: 'RequireJS',
-      module: 'App.Templates',
+      moduleSystem: 'browserify',
       standalone: true
     }))
     .pipe(gulp.dest(_srcDir + '/js'))
@@ -52,36 +43,13 @@ gulp.task('build:views', function() {
       });
 });
 
-gulp.task('build:js', [ 'clean:js' ], function(cb) {
-  var options = {
-    baseUrl: _srcDir + '/js',
-    mainConfigFile: _srcDir + '/js/main.js',
-    out: _distDir + '/assets/js/main.min.js',
-    optimize: 'none',
-    include: [ 'main' ],
-    name: 'almond',
-    generateSourceMaps: false,
-    preserveLicenseComments: false,
-    wrapShim: true
-  };
-
-  rjs.optimize(options, function() {
-    if (argv.verbose) {
-      gutil.log(arguments['0']);
-    }
-
-    if (argv.production) {
-      gulp.src(_distDir + '/assets/js/main.min.js')
-        .pipe(ngAnnotate())
-        .pipe(uglify('main.min.js'))
-        .pipe(gulp.dest(_distDir + '/assets/js'))
-          .on('finish', cb);
-    } else {
-      gulp.src(_distDir + '/assets/js/main.min.js')
-        .pipe(gulp.dest(_distDir + '/assets/js'))
-          .on('finish', cb);
-    }
-  });
+gulp.task('build:js', [ 'clean:js' ], function() {
+	gulp.src(_srcDir + '/js/main.js')
+		.pipe(browserify({
+		  insertGlobals : true
+		}))
+    .pipe(rename('main.min.js'))
+		.pipe(gulp.dest(_distDir + '/assets/js'))
 });
 
 gulp.task('build:css', function() {
@@ -112,7 +80,7 @@ gulp.task('watch', function() {
 })
 
 gulp.task('build', function(cb) {
-  gulp.start([ 'build:views', 'build:css', 'copy:fonts', 'copy:slick-fonts', 'copy:images' ], cb);
+  gulp.start([ 'build:views', 'build:css', 'copy:fonts', 'copy:images' ], cb);
 });
 
 gulp.task('default', [ 'build' ], function() {
