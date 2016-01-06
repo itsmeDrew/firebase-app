@@ -41,7 +41,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
       views: {
         'content@': {
           templateUrl: 'templates/set.tpl.html',
-          controller: 'SetCtrl',
+          controller: 'SetsCtrl',
           controllerAs: 'set'
         }
       },

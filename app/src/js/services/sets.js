@@ -45,6 +45,11 @@ function SetsCtrl () {
           name: 'charizard',
           cardnumber: '01',
           slug: genSlug('charizard')
+        },
+        '02': {
+          name: 'pidove',
+          cardnumber: '02',
+          slug: genSlug('pidove')
         }
       }
     });

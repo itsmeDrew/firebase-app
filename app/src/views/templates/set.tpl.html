@@ -4,12 +4,19 @@
   <h4>cards available</h4>
 
   <ul>
-    <li ng-repeat="card in set.currentSet.cards">{{card.name}} {{user.hasCard}} <input ng-model="user.hasCard" ng-click="set.saveUserCard(card)" type="checkbox"></li>
+    <li ng-repeat="card in set.currentSet.cards">
+      {{card.cardnumber}} {{card.name}} {{user.hasCard}}
+      <input ng-checked="set.userCardNumbers = card.cardnumber" ng-click="set.addCardToUser(card)" type="checkbox">
+    </li>
+  </ul>
+  <ul>
+    <li ng-repeat="card in set.userCards">
+      {{card.cardnumber}} {{card.name}} {{user.hasCard}}
+    </li>
   </ul>
 </div>
 <div ng-if="!set.currentSet.name">
   <h2>click a set to continue!</h2>
 </div>
-
 
 <!-- USER LOGGED IN -->

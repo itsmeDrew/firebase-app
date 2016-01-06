@@ -4,7 +4,7 @@ var app = angular.module('App.Controller.Sets', []);
 
 app.controller('SetsCtrl', SetsCtrl);
 
-function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, sets) {
+function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray, sets) {
   var vm = this;
   var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/');
   var _user = $scope.$parent.user ;
@@ -13,32 +13,11 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, sets) {
     for (var key in snapshot.val()) {
       if (snapshot.val().hasOwnProperty(key)) {
         vm.currentSet = snapshot.val()[key];
-        vm.saveUserCard = saveUserCard;
-
+        vm.addCardToUser = addCardToUser;
 
         var userSetsRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' );
 
-
-        function cardExistsCallback(card, exists) {
-          if (exists) {
-            //remove the card
-            return true;
-          } else {
-            addCardToUser(card);
-          }
-        }
-
-        function checkIfCardExists(card) {
-          userSetsRef.orderByChild("cardnumber").equalTo(card.cardnumber).once("value", function(snapshot) {
-            var _cardExists = snapshot.val() !== null;
-
-            cardExistsCallback(card, _cardExists)
-          });
-        }
-
-        function saveUserCard(card) {
-          checkIfCardExists(card);
-        }
+        vm.userCards = $firebaseObject(userSetsRef);
 
         function addCardToUser(newCard) {
           userSetsRef.push({
