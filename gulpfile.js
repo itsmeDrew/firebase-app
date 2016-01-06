@@ -50,6 +50,7 @@ gulp.task('build:js', [ 'clean:js' ], function() {
 		}))
     .pipe(rename('main.min.js'))
 		.pipe(gulp.dest(_distDir + '/assets/js'))
+    .pipe(notify('JS Success: <%= file.relative %>'));
 });
 
 gulp.task('build:css', function() {
