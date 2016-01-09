@@ -28,12 +28,16 @@ function AppCtrl ($scope, $state, $firebaseObject, $firebaseAuth, users, sets) {
   });
 
   function login() {
-    users.loginWithFacebook(auth, ref);
+    users.loginWithFacebook(auth, ref, reloadState);
   }
 
   function logout() {
     ref.unauth();
     $scope.user = '';
+    reloadState();
+  }
+
+  function reloadState() {
     $state.go($state.current, {}, {reload: true});
   }
 

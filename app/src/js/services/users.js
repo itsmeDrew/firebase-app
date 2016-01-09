@@ -11,10 +11,11 @@ function UsersCtrl () {
   vm.checkAuth = checkAuth;
   vm.loginWithFacebook = loginWithFacebook
 
-  function loginWithFacebook(auth, ref) {
+  function loginWithFacebook(auth, ref, callback) {
     auth.$authWithOAuthPopup("facebook").then(function(authData) {
       if (authData) {
         authHandler(ref);
+        callback();
         console.log("Authenticated with:", authData);
       }
     }).catch(function(error) {
