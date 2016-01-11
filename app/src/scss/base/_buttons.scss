@@ -1,0 +1,27 @@
+button {
+  border: none;
+}
+
+.btn {
+  @include font-size(12px);
+
+  display: inline-block;
+  padding: .75rem 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  letter-spacing: 2px;
+  border-radius: 99px;
+  -moz-border-radius: 99px;
+  -webkit-border-radius: 99px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.btn-solid--login {
+  @extend .btn;
+
+  background: $blue;
+  color: $white;
+}

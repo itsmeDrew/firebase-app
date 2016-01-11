@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" ng-app="App">
+<html ng-class="{ login:!user }" class="no-js" ng-app="App">
 <head>
   <base href="/">
   <meta charset="UTF-8">
@@ -16,11 +16,9 @@
 </head>
 <body ng-controller="AppCtrl as app">
 
-  <h1>firebase app</h1>
-
-  <div ui-view="header"></div>
+  <div ng-if="user" ui-view="header"></div>
   <div ui-view="content"></div>
-  <div ui-view="footer"></div>
+  <div ng-if="user" ui-view="footer"></div>
 
   <script src="assets/js/main.min.js"></script>
 

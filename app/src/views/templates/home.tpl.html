@@ -1,13 +1,7 @@
-<h2>home tpl here!</h2>
-
-<!-- USER LOGGED IN -->
-<div ng-show="user" class="logged-in">
-  <h2>Logged in information</h2>
-
-  <ul>
-    <li ng-repeat="set in sets">
-      <p>{{ set.name }} has {{ set.cards }} cards</p>
-      <p>I have</p>
-    </li>
-  </ul>
+<div class="login__content">
+  <img class="login__logo" src="assets/img/logo.png" alt="pokemonlist logo">
+  <h2 class="login__heading">A simple online checklist.</h2>
+  <h2 class="login__heading">Always free.</h2>
+  <button class="login__btn btn-solid--login" ng-show="!user" ng-click="app.login()">login with facebook</button>
+  <img class="login__character hidden--md" src="assets/img/charmander.png" />
 </div>

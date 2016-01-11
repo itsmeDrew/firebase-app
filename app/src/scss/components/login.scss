@@ -1,0 +1,48 @@
+.login {
+  height: 100%;
+  width: 100%;
+}
+.login body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: $orange;
+  background: radial-gradient($orange, darken($orange, 15%) );
+  background: -webkit-radial-gradient($orange, darken($orange, 15%) );
+  background: -moz-radial-gradient($orange, darken($orange, 15%) );
+}
+
+.login div[ui-view="content"] {
+  height: 100%;
+  width: 100%;
+}
+
+.login__content {
+  @include centerVertical();
+
+  width: 80%;
+  top: 10%;
+  max-width: 560px;
+  position: relative;
+  text-align: center;
+  z-index: 10;
+}
+
+.login__logo {
+  margin-bottom: 1rem;
+}
+
+.login__heading {
+  @include font-size(24px);
+
+  font-family: $base-font-family--sans-serif;
+  color: $white;
+}
+
+.login__character {
+  position: absolute;
+  bottom: -60%;
+  left: -30%;
+  z-index: -1;
+  width: 900px;
+}

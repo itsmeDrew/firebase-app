@@ -56,7 +56,7 @@ gulp.task('build:js', [ 'clean:js' ], function() {
 gulp.task('build:css', function() {
   return sass(_srcDir + '/scss/main.scss', {
         style: 'compressed',
-        loadPath: './bower_components'
+        loadPath: './node_modules'
       })
       .on('error', notify.onError(function(err) {
         return 'CSS Error:' + err.message;

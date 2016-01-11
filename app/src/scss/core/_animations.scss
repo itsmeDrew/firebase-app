@@ -1,0 +1,17 @@
+@mixin slide($startVal, $endVal) {
+  @include animation('slide 0.5s 1');
+
+  @include keyframes(slide) {
+    0% { height: $startVal; }
+    100% { height: $endVal; }
+  }
+}
+
+@mixin fade($startVal, $endVal) {
+  @include animation('fade 0.5s 1');
+
+  @include keyframes(fade) {
+    0% { opacity: $startVal; }
+    100% { opacity: $endVal; }
+  }
+}

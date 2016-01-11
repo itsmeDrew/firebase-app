@@ -1,0 +1,61 @@
+///////////////////////////////
+/// BREAKPOINTS
+///////////////////////////////
+
+$breakpoint--small: 480px;
+$breakpoint--medium: 768px;
+$breakpoint--large: 970px;
+$breakpoint--xlarge: 1200px;
+
+///////////////////////////////
+/// BASE
+///////////////////////////////
+
+$base-font-family--serif: 'Arvo', 'Times New Roman', serif;
+$base-font-family--sans-serif: 'Lato', arial, sans-serif;
+$base-font-size: 16px;
+$base-line-height: $base-font-size * 1.5;
+
+///////////////////////////////
+/// HEADERS
+///////////////////////////////
+
+// header
+$header-main__height: 75px;
+$header-main__bg-color: $white;
+
+// section break
+$sec-break__padding: 1rem 0;
+$sec-break__bg-color--light: $white;
+$sec-break__bg-color--dark: $black;
+$sec-break-triangle__size: 20px;
+
+
+// nav
+$nav-main__padding: .5rem 2rem;
+$nav-main__font-size: $base-font-size - 2;
+$nav-main-link__margin: 0 1.25rem;
+$nav-main-link__color: $grey;
+$nav-main-link__color--hover: $red;
+
+///////////////////////////////
+/// SLICK SLIDER DEFAULTS
+///////////////////////////////
+
+$slider-heading__width: 55%;
+$slider__height--small: 225px;
+$slider__height--large: 425px;
+$slider__height--xlarge: 500px;
+$slider__margin-bottom: 5rem;
+$slider-dots__color--inactive: $black;
+$slider-dots__color--active: blue;
+
+// home slider
+$home-slider__arrow-spacing: 3rem;
+
+///////////////////////////////
+/// TATTOO ART
+///////////////////////////////
+
+$art-display__width--medium: 360px;
+$art-display__width--large: 480px;

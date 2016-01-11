@@ -1,6 +1,5 @@
 <header>
   <h2>header here</h2>
-  <button ng-show="!user" ng-click="app.login()">login with facebook</button>
   <button ng-show="user" ng-click="app.logout()">logout</button>
   <p ng-show="user">Logged in as {{ user.displayName }}</p>
   <img src="{{ user.profileImageURL }}" alt="">
