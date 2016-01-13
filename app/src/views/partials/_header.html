@@ -1,7 +1,13 @@
-<header>
-  <h2>header here</h2>
-  <button ng-show="user" ng-click="app.logout()">logout</button>
-  <p ng-show="user">Logged in as {{ user.displayName }}</p>
-  <img src="{{ user.profileImageURL }}" alt="">
+<header class="header">
+  <img class="header-logo" src="assets/img/logo.png" alt="logo">
+  <div class="nav" ui-view="nav"></div>
+  <div class="header-login">
+    <div class="header-login__profile-img--wrapper">
+      <img class="header-login__profile-img" src="{{ user.profileImageURL }}" alt="">
+    </div>
+    <div class="header-login__content">
+      <p class="header-login__message" ng-show="user">Welcome, {{ user.displayName }}</p>
+      <button class="header-login__btn btn btn-solid" ng-show="user" ng-click="app.logout()">logout</button>
+    </div>
+  </div>
 </header>
-<div ui-view="nav"></div>

@@ -1,0 +1,53 @@
+.header {
+  @include cf();
+
+  background: $blue;
+  padding: 1rem;
+  position: relative;
+  height: 95px;
+}
+
+.header-logo {
+  height: 100%;
+
+  float: left;
+}
+
+.header-login {
+  @include centerHorizontal();
+
+  float: right;
+  position: relative;
+}
+
+.header-login__content {
+  float: left;
+  margin-left: .675rem;
+}
+
+.header-login__profile-img--wrapper {
+  float: left;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 99px;
+  -moz-border-radius: 99px;
+  -webkit-border-radius: 99px;
+}
+
+.header-login__message {
+  color: $white;
+  margin: 0;
+}
+
+.header-login__btn {
+  @include font-size(10px);
+
+  background: $yellow;
+  padding: .5rem 1rem;
+  transition: .15s all ease-in;
+}
+
+.header-login__btn:hover {
+  background: darken($yellow, 10%);
+}

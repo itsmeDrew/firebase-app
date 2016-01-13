@@ -7,7 +7,7 @@ body {
   @include font-size($base-font-size);
 
   line-height: $base-line-height;
-  font-family: $base-font-family--serif;
+  font-family: $base-font-family--sans-serif;
 }
 
 hgroup {

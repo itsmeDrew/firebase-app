@@ -1,0 +1,19 @@
+.nav {
+  @include centerHorizontal();
+
+  padding: 0 1rem;
+  position: relative;
+  float: left;
+}
+
+.nav-item__link {
+  color: $white;
+  padding-bottom: .5rem;
+  border-bottom: 0px solid $blue;
+  transition: .15s all ease-in;
+}
+
+.nav-item__link:hover {
+  color: $white;
+  border-bottom: 4px solid $yellow;
+}
