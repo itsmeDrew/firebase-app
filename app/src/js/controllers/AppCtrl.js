@@ -34,7 +34,7 @@ function AppCtrl ($scope, $state, $firebaseObject, $firebaseAuth, users, sets) {
   function logout() {
     ref.unauth();
     $scope.user = '';
-    reloadState();
+    $state.go("app", {}, {reload: true});
   }
 
   function reloadState() {
@@ -45,6 +45,7 @@ function AppCtrl ($scope, $state, $firebaseObject, $firebaseAuth, users, sets) {
     var authData = users.checkAuth(ref);
 
     if (authData) {
+      console.log('scope', $scope);
       $scope.user = authData.facebook;
     }
   }

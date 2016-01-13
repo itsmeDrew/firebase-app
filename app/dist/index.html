@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-class="{ login:!user }" class="no-js" ng-app="App">
+<html class="no-js" ng-app="App">
 <head>
   <base href="/">
   <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     };
   </script>
 </head>
-<body ng-controller="AppCtrl as app">
+<body ng-controller="AppCtrl as app" ng-class="{ login: !user }">
 
   <div ng-if="user" ui-view="header"></div>
   <div ui-view="content"></div>
