@@ -27,6 +27,10 @@ function AppCtrl ($scope, $state, $firebaseObject, $firebaseAuth, users, sets) {
     setUser();
   });
 
+  if (!$scope.user) {
+    $state.go("app", {}, {reload: true});
+  }
+
   function login() {
     users.loginWithFacebook(auth, ref, reloadState);
   }

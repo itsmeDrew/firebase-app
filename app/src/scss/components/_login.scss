@@ -14,10 +14,17 @@
 }
 
 .login__content {
-  @include centerVertical();
+  @include breakpointSmallerThan($breakpoint--large) {
+    @include centerAll();
+  }
+
+  @include breakpointLargerThan($breakpoint--large) {
+    @include centerVertical();
+
+    top: 10%;
+  }
 
   width: 80%;
-  top: 10%;
   max-width: 560px;
   position: relative;
   text-align: center;
@@ -37,8 +44,6 @@
 
 .login__character {
   position: absolute;
-  bottom: -60%;
   left: -30%;
   z-index: -1;
-  width: 900px;
 }
