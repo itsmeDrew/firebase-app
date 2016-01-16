@@ -10,6 +10,8 @@ require('./controllers/HomeCtrl');
 require('./controllers/NavCtrl');
 require('./controllers/CategoryCtrl');
 require('./controllers/SetsCtrl');
+require('./controllers/DashboardCtrl');
+
 require('./services/sets');
 require('./services/users');
 
@@ -21,6 +23,7 @@ var app = angular.module('App', [
   'App.Controller.Home',
   'App.Controller.Category',
   'App.Controller.Sets',
+  'App.Controller.Dashboard',
   'App.Service.Sets',
   'App.Service.Users'
 ]);

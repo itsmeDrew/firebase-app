@@ -1,6 +1,6 @@
 input {
   padding: .75rem 1rem;
-  color: $wild-sand;
+  color: $black;
 }
 
 input[type=submit] {
@@ -9,8 +9,7 @@ input[type=submit] {
 
 select {
   border: 1px solid $wild-sand;
-  color: $wild-sand;
-  width: 100%;
+  color: $black;
   height: 30px;
 }
 

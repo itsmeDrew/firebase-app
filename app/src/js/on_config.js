@@ -46,6 +46,16 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
         }
       },
       params : { setId: null, },
+    })
+    .state('app.dashboard', {
+      url: 'dashboard',
+      views: {
+        'content@': {
+          templateUrl: 'templates/dashboard.tpl.html',
+          controller: 'DashboardCtrl',
+          controllerAs: 'dashboard'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/');

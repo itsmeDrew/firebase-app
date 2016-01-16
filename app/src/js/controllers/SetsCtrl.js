@@ -4,7 +4,7 @@ var app = angular.module('App.Controller.Sets', []);
 
 app.controller('SetsCtrl', SetsCtrl);
 
-function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray, sets) {
+function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray) {
   var vm = this;
   var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/');
   var _user = $scope.$parent.user ;

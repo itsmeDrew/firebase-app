@@ -7,8 +7,8 @@ app.service('sets', SetsCtrl);
 function SetsCtrl () {
   var vm = this;
 
+  vm.addNewCard = addNewCard;
   vm.setCardData = setCardData;
-  vm.genCardData = genCardData;
 
   function setCardData(ref) {
     var _setsRef = ref.child('setsAvailable');
@@ -39,32 +39,23 @@ function SetsCtrl () {
       id: _newSetRef.key(),
       numberofcards: numberofcards,
       slug: genSlug(name),
-      releasedate: releaseDate,
-      cards: {
-        '01': {
-          name: 'charizard',
-          cardnumber: '01',
-          slug: genSlug('charizard')
-        },
-        '02': {
-          name: 'pidove',
-          cardnumber: '02',
-          slug: genSlug('pidove')
-        }
-      }
+      releasedate: releaseDate
     });
   }
 
-  function genCardData(id, cardnumber, name) {
-    var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + id);
+  function addNewCard(name, cardnumber, set, rarity, type) {
+    var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + set.id + '/cards');
     var _newCardRef = ref.push();
 
-    console.log('setting card');
+    console.log('setting card, the set is ', set);
 
     _newCardRef.set({
-      cardnumber: cardnumber,
       name: name,
-      id: _newCardRef.key()
+      cardnumber: cardnumber,
+      id: _newCardRef.key(),
+      slug: genSlug(name),
+      rarity: rarity,
+      type: type
     })
   }
 

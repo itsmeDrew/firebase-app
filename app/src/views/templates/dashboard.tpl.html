@@ -1,0 +1,27 @@
+<h2>SUBMIT A CARD</h2>
+
+<input type="text" placeholder="pokemon name" ng-model="card.pokemon.name">
+<input type="text" placeholder="card number" ng-model="card.pokemon.cardnumber">
+<select ng-model="card.pokemon.rarity">
+  <option value="rare-holo">rare-holo</option>
+  <option value="rare">rare</option>
+  <option value="uncommon">uncommon</option>
+  <option value="common">common</option>
+</select>
+<select ng-model="card.pokemon.type">
+  <option value="regular">regular</option>
+  <option value="reverse-holo">reverse-holo</option>
+  <option value="regular holo">regular holo</option>
+  <option value="full-art-holo">full-art-holo</option>
+</select>
+<select ng-options="set as set.name for set in sets" ng-model="card.set"></select>
+<a href="#"
+  class="btn"
+  ng-click="dashboard.submitCard(
+              card.pokemon.name,
+              card.pokemon.cardnumber,
+              card.set,
+              card.pokemon.rarity,
+              card.pokemon.type
+            )"
+>submit</a>
