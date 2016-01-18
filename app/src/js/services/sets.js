@@ -43,20 +43,20 @@ function SetsCtrl () {
     });
   }
 
-  function addNewCard(name, cardnumber, set, rarity, type) {
+  function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega) {
     var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + set.id + '/cards');
     var _newCardRef = ref.push();
-
-    console.log('setting card, the set is ', set);
-
+    
     _newCardRef.set({
       name: name,
       cardnumber: cardnumber,
       id: _newCardRef.key(),
       slug: genSlug(name),
       rarity: rarity,
-      type: type
-    })
+      mega: mega ||  false,
+      typeOne: typeOne || null,
+      typeTwo: typeTwo || null
+    });
   }
 
 };

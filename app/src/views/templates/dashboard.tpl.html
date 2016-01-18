@@ -1,27 +1,38 @@
 <h2>SUBMIT A CARD</h2>
 
-<input type="text" placeholder="pokemon name" ng-model="card.pokemon.name">
-<input type="text" placeholder="card number" ng-model="card.pokemon.cardnumber">
-<select ng-model="card.pokemon.rarity">
-  <option value="rare-holo">rare-holo</option>
-  <option value="rare">rare</option>
-  <option value="uncommon">uncommon</option>
-  <option value="common">common</option>
-</select>
-<select ng-model="card.pokemon.type">
-  <option value="regular">regular</option>
-  <option value="reverse-holo">reverse-holo</option>
-  <option value="regular holo">regular holo</option>
-  <option value="full-art-holo">full-art-holo</option>
-</select>
-<select ng-options="set as set.name for set in sets" ng-model="card.set"></select>
+<div class="step">
+  <select ng-options="set as set.name for set in sets" ng-model="card.set"></select>
+</div>
+<div class="step" ng-show="card.set">
+  <input type="text" placeholder="card number" ng-model="card.pokemon.cardnumber" ng-change="dashboard.checkIfCardExists(card.pokemon.cardnumber, card.set)" ng-class="{ error: dashboard.cardExists }">
+  <input type="text" placeholder="pokemon name" ng-model="card.pokemon.name">
+  <select ng-model="card.pokemon.rarity">
+    <option value="rare-holo-ex">rare-holo-ex</option>
+    <option value="rare-ultra">rare-ultra</option>
+    <option value="rare-holo">rare-holo</option>
+    <option value="rare">rare</option>
+    <option value="uncommon">uncommon</option>
+    <option value="common">common</option>
+  </select>
+  <select ng-model="card.pokemon.type.one" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
+  </select>
+  <label ng-if="card.pokemon.rarity === 'rare-holo-ex'">
+    MEGA
+    <input ng-model="card.pokemon.mega" type="checkbox">
+  </label>
+  <select ng-model="card.pokemon.type.two" ng-if="card.pokemon.rarity !== 'rare-holo-ex'" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
+  </select>
+</div>
 <a href="#"
   class="btn"
-  ng-click="dashboard.submitCard(
+  ng-if="!dashboard.cardExists"
+  ng-click="dashboard.addNewCard(
               card.pokemon.name,
               card.pokemon.cardnumber,
               card.set,
               card.pokemon.rarity,
-              card.pokemon.type
+              card.pokemon.type.one,
+              card.pokemon.type.two,
+              card.pokemon.mega
             )"
 >submit</a>
