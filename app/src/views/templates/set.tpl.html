@@ -8,21 +8,19 @@
     <li ng-repeat="card in set.currentSet.cards" style="margin: 10px 0;">
       {{card.cardnumber}} {{card.name}}
       <div ng-if="user">
-        <input ng-model="card.banjo" type="checkbox">
-
         <!-- IF USER DOES NOT HAVE CARD -->
-        <button ng-show="!card.banjo && user" ng-click="set.addCardToUser(card)">Add Card</button>
+        <button ng-show="!card.hasCard && user" ng-click="set.addCardToUser(card)">Add Card</button>
       </div>
-  
+
       <!-- IF USER HAS CARD -->
       <div
         ng-repeat="userCard in set.userCards"
         ng-if="card.cardnumber === userCard.cardnumber && userCard.qty >= 1"
-        ng-init="userCard.qty >= 1 ? card.banjo = true : card.banjo = false"
+        ng-init="userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false"
       >
-          <input placeholder="{{ userCard.qty }}" type="text" style="width:20px">
-          <button ng-click="set.removeUserCard(userCard); userCard.qty >= 1 ? card.banjo = true : card.banjo = false">-</button>
-          <button ng-click="set.addCardToUser(card, userCard); userCard.qty >= 1 ? card.banjo = true : card.banjo = false">+</button>
+          <input placeholder="{{ userCard.qty }}" type="text" value="{{ userCard.qty }}">
+          <button ng-click="set.removeUserCard(userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
+          <button ng-click="set.addCardToUser(card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
       </div>
       <!-- END IF -->
 
