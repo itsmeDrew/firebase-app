@@ -45,13 +45,14 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray
         function removeUserCard(userCard) {
           var _userCardRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' + userCard.id);
 
-          if (userCard.qty >= 2) {
-            _userCardRef.update({
-              qty: userCard.qty - 1
-            });
-          } else {
+          _userCardRef.update({
+            qty: userCard.qty - 1
+          });
+
+          if (userCard.qty < 1) {
             _userCardRef.remove();
           }
+
         }
 
         break;
