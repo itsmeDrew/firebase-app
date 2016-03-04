@@ -15,10 +15,10 @@
       <!-- IF USER HAS CARD -->
       <div
         ng-repeat="userCard in set.userCards"
-        ng-if="card.cardnumber === userCard.cardnumber && userCard.qty >= 1"
+        ng-if="card.cardnumber === userCard.cardnumber"
         ng-init="userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false"
       >
-          <input placeholder="{{ userCard.qty }}" type="text" value="{{ userCard.qty }}">
+          <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty(updatedQty)">
           <button ng-click="set.removeUserCard(userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
           <button ng-click="set.addCardToUser(card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
       </div>

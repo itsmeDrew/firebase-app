@@ -15,6 +15,11 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray
         vm.currentSet = snapshot.val()[key];
         vm.addCardToUser = addCardToUser;
         vm.removeUserCard = removeUserCard;
+        vm.updateQty = updateQty;
+
+        var _userSDF = 'https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id;
+
+        console.log(_user);
 
         var userSetsRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' );
 
@@ -27,7 +32,6 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray
             _userCardRef.update({
               qty: userCard.qty + 1
             });
-            console.log('updated qty', userCard);
           } else {
             var _newCardRef = userSetsRef.push();
 
@@ -51,6 +55,13 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray
 
           if (userCard.qty < 1) {
             _userCardRef.remove();
+          }
+
+        }
+
+        function updateQty(newQty) {
+          if (e.keyCode == 13) {
+            console.log('updating to ', newQty);
           }
 
         }
