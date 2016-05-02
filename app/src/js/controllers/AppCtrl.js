@@ -8,20 +8,13 @@ function AppCtrl ($scope, $state, $firebaseObject, $firebaseAuth, users, sets) {
   var vm = this;
   var baseDataURL = 'https://mypokemonclub.firebaseio.com/';
   var ref = new Firebase(baseDataURL);
-  var setsURL = new Firebase(baseDataURL + 'setsAvailable/');
-  var cardSets = $firebaseObject(setsURL);
   var auth = $firebaseAuth(ref);
 
   vm.login = login;
   vm.logout = logout
   $scope.user = '';
-  vm.setCards = false; //dev
 
-  cardSets.$bindTo($scope, 'sets');
-
-  if (vm.setCards) {
-    sets.setCardData(ref);
-  }
+  sets.getSets().$bindTo($scope, 'sets');
 
   ref.onAuth(function(authData) {
     setUser();
