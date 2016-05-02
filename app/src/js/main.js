@@ -40,6 +40,6 @@ var app = angular.module('App', [
 
 app.controller('AppCtrl', require('./controllers/AppCtrl'));
 
-app.constant('App.Config', window.config);
+app.constant('config', window.config);
 
 app.config(require('./on_config'));
