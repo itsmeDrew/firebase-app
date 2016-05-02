@@ -28,6 +28,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
     })
     .state('app.category', {
       url: 'sets',
+      data : {
+        cssClassnames : 'sets'
+      },
       views: {
         'content@': {
           templateUrl: 'templates/category.tpl.html',
@@ -38,6 +41,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
     })
     .state('app.set', {
       url: 'sets/:setSlug',
+      data : {
+        cssClassnames : 'set'
+      },
       views: {
         'content@': {
           templateUrl: 'templates/set.tpl.html',
@@ -49,6 +55,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
     })
     .state('app.dashboard', {
       url: 'dashboard',
+      data : {
+        cssClassnames : 'dashboard'
+      },
       views: {
         'content@': {
           templateUrl: 'templates/dashboard.tpl.html',

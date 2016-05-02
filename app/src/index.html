@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html class="no-js" ng-app="App">
+<head>
+  <!-- <base href="/"> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Firebase Application</title>
+  <link rel="stylesheet" href="assets/css/main.min.css">
+
+  <script>
+    var baseUrl = '//firebase.';
+    window.config = {
+      baseUrl: baseUrl
+    };
+  </script>
+</head>
+<body ng-controller="AppCtrl as app" ng-class="{ login: !user }" route-classnames>
+
+  <div ng-if="user" ui-view="header"></div>
+  <div ui-view="content"></div>
+  <div ng-if="user" ui-view="footer"></div>
+
+  <script src="assets/js/main.min.js"></script>
+
+</body>
+</html>
