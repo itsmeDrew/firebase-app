@@ -1,9 +1,15 @@
-<h2>Sets Available</h2>
-
-<ul>
-  <li ng-repeat="set in sets">
-    <a ui-sref="app.set({ setSlug: set.slug, setId: set.id })">{{ set.name }}</a>
-  </li>
-</ul>
+<section class="set-cards" ng-if="sets">
+  <h2>Sets Available</h2>
+  <slick infinite=true slides-to-show=4 slides-to-scroll=4 settings="cat.slickConfig" arrows=false>
+    <div class="set-card" ng-repeat="set in sets">
+      <div class="set-card__content">
+        <div class="set-card__header">
+          <strong>{{ set.name }}</strong>
+        </div>
+        <a class="set-card__btn btn-solid--primary" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">go to set</a>
+      </div>
+    </div>
+  </slick>
+</section>
 
 <!-- USER LOGGED IN -->

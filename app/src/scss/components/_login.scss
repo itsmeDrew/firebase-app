@@ -38,7 +38,7 @@
 .login__heading {
   @include font-size(24px);
 
-  font-family: $base-font-family--sans-serif;
+  font-family: $base-font__family--sans-serif;
   color: $white;
 }
 
@@ -46,4 +46,10 @@
   position: absolute;
   left: -30%;
   z-index: -1;
+}
+
+.login__btn {
+  @include borderRadius(99px);
+
+  margin: 1rem 0;
 }

@@ -1,0 +1,36 @@
+.set-cards {
+  padding: 2rem 0;
+}
+
+.set-card {
+  @include boxShadow(0 0 10px rgba(0,0,0,0.3));
+  @include transition($base-animation__speed all);
+
+  margin: 1vw;
+  padding: 1rem;
+
+  @include breakpointLargerThan($breakpoint--medium) {
+    @include scale(0.9);
+
+    opacity: 0.7;
+
+    &:hover {
+      @include scale(1);
+
+      opacity: 1;
+    }
+  }
+}
+
+.set-card__content {
+  text-align: center;
+}
+
+.set-card__header {
+  display: block;
+  padding: 1rem 0;
+}
+
+.set-card__btn {
+  display: inline-block;
+}
