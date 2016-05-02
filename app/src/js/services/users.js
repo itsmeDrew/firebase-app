@@ -4,17 +4,20 @@ var app = angular.module('App.Service.Users', []);
 
 app.service('users', UsersCtrl);
 
-function UsersCtrl () {
+function UsersCtrl ($firebaseAuth, config) {
   var vm = this;
+  var baseRef = new Firebase(config.baseDataURL);
+  var baseAuth = $firebaseAuth(baseRef);
 
   vm.authHandler = authHandler;
   vm.checkAuth = checkAuth;
-  vm.loginWithFacebook = loginWithFacebook
+  vm.login = loginWithFacebook;
+  vm.logout = logout;
 
-  function loginWithFacebook(auth, ref, callback) {
-    auth.$authWithOAuthPopup("facebook").then(function(authData) {
+  function loginWithFacebook(callback) {
+    baseAuth.$authWithOAuthPopup("facebook").then(function(authData) {
       if (authData) {
-        authHandler(ref);
+        authHandler(baseRef);
         callback();
         console.log("Authenticated with:", authData);
       }
@@ -24,7 +27,9 @@ function UsersCtrl () {
   }
 
   function authHandler(ref) {
-    ref.onAuth(function(authData) {
+    var _ref = ref || baseRef;
+
+    _ref.onAuth(function(authData) {
       if (authData) {
         var _userList = ref.child("users");
 
@@ -66,11 +71,18 @@ function UsersCtrl () {
   }
 
   function checkAuth(ref) {
-    var authData = ref.getAuth();
+    var _ref = ref || baseRef;
+    var authData = _ref.getAuth();
 
     if (authData) {
       return authData;
     }
+  }
+
+  function logout(ref) {
+    var _ref = ref || baseRef;
+
+    return _ref.unauth();
   }
 
 };

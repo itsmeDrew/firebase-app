@@ -23,16 +23,14 @@
   <select ng-model="card.pokemon.type.two" ng-if="card.pokemon.rarity !== 'rare-holo-ex'" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
   </select>
 </div>
-<a href="#"
-  class="btn"
-  ng-if="!dashboard.cardExists"
-  ng-click="dashboard.addNewCard(
-              card.pokemon.name,
-              card.pokemon.cardnumber,
-              card.set,
-              card.pokemon.rarity,
-              card.pokemon.type.one,
-              card.pokemon.type.two,
-              card.pokemon.mega
-            )"
->submit</a>
+<a href="#" class="btn" ng-if="!dashboard.cardExists"
+    ng-click="dashboard.addNewCard(
+      card.pokemon.name,
+      card.pokemon.cardnumber,
+      card.set,
+      card.pokemon.rarity,
+      card.pokemon.type.one,
+      card.pokemon.type.two,
+      card.pokemon.mega
+    )">
+submit</a>
