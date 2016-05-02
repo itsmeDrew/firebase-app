@@ -7,11 +7,11 @@
 @import 'core/animations';
 
 // vendor
-@import 'jeet/scss/jeet/index';
+@import './node_modules/bedrock-css/src/scss/bedrock';
 
 // core overrides
 @import 'core/colors';
-@import 'core/variables';
+@import 'core/config';
 
 // base
 @import 'base/reset';

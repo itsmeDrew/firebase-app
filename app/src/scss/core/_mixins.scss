@@ -30,6 +30,23 @@
 /// FONT HELPERS
 ///////////////////////////////
 
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size, $vw:"") {
+  @if($vw != "") {
+    font-size: $vw;
+    font-size: calculateRem($vw);
+    font-size: $size;
+
+  } @else {
+    font-size: $size;
+    font-size: calculateRem($size);
+  }
+}
+
 @mixin font-face($style-name, $file, $family, $font-weight, $category:"") {
     $filepath: "../fonts/" + $family + "/" + $file;
     @font-face {
@@ -51,52 +68,9 @@
     }
 }
 
-///////////////////////////////
-/// FONT SIZE HELPERS
-///////////////////////////////
-
-@function calculateRem($size) {
-  $remSize: $size / 16px;
-  @return $remSize * 1rem;
-}
-
-@mixin font-size($size) {
-  font-size: $size;
-  font-size: calculateRem($size);
-}
 
 ///////////////////////////////
-/// ANIMATION HELPERS
-///////////////////////////////
-
-@mixin keyframes($animation-name) {
-    @-webkit-keyframes #{$animation-name} {
-        @content;
-    }
-    @-moz-keyframes #{$animation-name} {
-        @content;
-    }
-    @-ms-keyframes #{$animation-name} {
-        @content;
-    }
-    @-o-keyframes #{$animation-name} {
-        @content;
-    }
-    @keyframes #{$animation-name} {
-        @content;
-    }
-}
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};
-}
-
-///////////////////////////////
-/// CENTERING HELPERS
+/// TRANSFORM HELPERS
 ///////////////////////////////
 
 @mixin centerHorizontal() {
@@ -121,18 +95,116 @@
   -moz-transform: translate(-50%, -50%);
 }
 
+@mixin rotate($deg) {
+  -webkit-transform: rotate($deg + deg);
+  -moz-transform: rotate($deg + deg);
+  -ms-transform: rotate($deg + deg);
+  -o-transform: rotate($deg + deg);
+  transform: rotate($deg + deg);
+}
+
+@mixin translate3d($pos1, $pos2, $pos3) {
+  transform: translate3d($pos1, $pos2, $pos3);
+  -moz-transform: translate3d($pos1, $pos2, $pos3);
+  -webkit-transform: translate3d($pos1, $pos2, $pos3);
+}
+
+
 ///////////////////////////////
-/// SECTION BREAK
+/// STYLE HELPERS
 ///////////////////////////////
 
-@mixin sectionTriangle($size, $color) {
-  display: block;
+@mixin gradientLinear ($colorFrom, $colorTo) {
+  background: $colorTo;
+  background: -webkit-linear-gradient($colorFrom, $colorTo);
+  background: -o-linear-gradient($colorFrom, $colorTo);
+  background: -moz-linear-gradient($colorFrom, $colorTo);
+  background: linear-gradient($colorFrom, $colorTo);
+}
+
+@mixin boxShadow($amount: $base-box-shadow, $inset: false) {
+ @if($inset) {
+   box-shadow: inset $amount;
+   -moz-box-shadow: inset $amount;
+   -webkit-box-shadow: inset $amount;
+ } @else {
+   box-shadow: $amount;
+   -moz-box-shadow: $amount;
+   -webkit-box-shadow: $amount;
+ }
+
+}
+
+@mixin borderRadius($radius, $direction:"") {
+  @if($direction != "") {
+    border-#{$direction}-radius: $radius;
+    -moz-border-#{$direction}-radius: $radius;
+    -webkit-border-#{$direction}-radius: $radius;
+  } @else {
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+  }
+}
+
+@mixin slantBottom($amount) {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 $amount);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 $amount);
+}
+
+@mixin overlay($color, $opacity) {
   content: "";
-  bottom: -$size;
+  display: block;
+  position: absolute;
+  background: $color;
+  opacity: $opacity;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+///////////////////////////////
+/// ARROW HELPERS
+///////////////////////////////
+
+@mixin arrow() {
   width: 0;
   height: 0;
+  position: absolute;
+  content: "";
+  display: block;
+}
+
+@mixin arrowUp($size, $color) {
+  @include arrow();
+
+  border-left: $size solid transparent;
+  border-right: $size solid transparent;
+  border-bottom: $size solid $color;
+}
+
+@mixin arrowDown($size, $color) {
+  @include arrow();
+
   border-left: $size solid transparent;
   border-right: $size solid transparent;
   border-top: $size solid $color;
-  z-index: 10;
+}
+
+@mixin arrowLeft($size, $color) {
+  @include arrow();
+
+  border-top: $size solid transparent;
+  border-bottom: $size solid transparent;
+  border-right:$size solid $color;
+}
+
+@mixin arrowRight($size, $color) {
+  @include arrow();
+
+  border-top: $size solid transparent;
+  border-bottom: $size solid transparent;
+  border-left: $size solid $color;
 }
