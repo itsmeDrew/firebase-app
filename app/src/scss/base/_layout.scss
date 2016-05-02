@@ -4,30 +4,12 @@ html {
 }
 
 body {
-  @include font-size($base-font-size);
+  @include font-size($base-font__size);
 
   line-height: $base-line-height;
-  font-family: $base-font-family--sans-serif;
+  font-family: $base-font__family--sans-serif;
 }
 
 hgroup {
   margin-bottom: 2rem;
-}
-
-.hidden--sm {
-  @include breakpointSmallerThan($breakpoint--medium) {
-    display: none;
-  }
-}
-
-.hidden--md {
-  @include breakpointSmallerThan($breakpoint--large) {
-    display: none;
-  }
-}
-
-.hidden--lg {
-  @include breakpointLargerThan($breakpoint--medium) {
-    display: none;
-  }
 }

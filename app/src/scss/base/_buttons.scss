@@ -3,24 +3,183 @@ button {
 }
 
 .btn {
-  @include font-size(12px);
+  @include borderRadius($btn__border-radius);
+  @include transition($base-animation__speed all);
 
+  font-weight: 700;
+  letter-spacing: 1px;
   display: inline-block;
-  padding: .75rem 2rem;
-  font-weight: bold;
+  text-align: center;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  border-radius: 99px;
-  -moz-border-radius: 99px;
-  -webkit-border-radius: 99px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+
+  @include breakpointSmallerThan($breakpoint--small) {
+    @include font-size(4vmin, $btn__font-size);
+
+    padding: 5vw;
+  }
+
+  @include breakpointLargerThan($breakpoint--small) {
+    @include font-size($btn__font-size);
+
+    padding: $btn__padding;
+  }
 }
 
-.btn-solid--login {
+.btn-solid--primary {
   @extend .btn;
 
-  background: $blue;
+  background: $btn-primary__background;
+  color: $btn-primary__color;
+
+  &:hover {
+    background: darken($btn-primary__background, 5%);
+    color: $btn-primary__color;
+  }
+
+  &:active {
+    color: $white;
+  }
+}
+
+.btn-solid--secondary {
+  @extend .btn;
+
+  background: rgba(0,0,0,0.7);
+  color: $btn-secondary__color;
+
+  &:hover {
+    color: $btn-secondary__color;
+    background: rgba(0,0,0,0.9);
+  }
+
+  &:active {
+    color: $white;
+  }
+}
+
+.btn-outline {
+  @extend .btn;
+
+  padding: 1rem 3rem;
+  border-width: $btn-border__width;
+  border-style: solid;
+
+  &:hover {
+    border-color: $green;
+  }
+}
+
+.btn-outline--primary {
+  @extend .btn-outline;
+
+  border-color: $white;
   color: $white;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.btn-outline--secondary {
+  @extend .btn-outline;
+
+  border-color: $black;
+  color: $black;
+
+  &:hover {
+    color: $black;
+  }
+}
+
+.btn-outline__ico {
+  padding-left: 1rem;
+}
+
+// animated buttons
+
+.btn-animation--arrows {
+  span {
+    display: inline-block;
+    position: relative;
+    transition: $base-animation__speed;
+    font-weight: bold;
+
+    &:after {
+      @include font-size(20px);
+
+      content: '»';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -10px;
+      transition: 0.5s;
+      line-height: .8;
+      vertical-align: top;
+    }
+  }
+
+  &:hover {
+    background: $btn-primary__background;
+    color: $btn-secondary__color;
+
+    span {
+      padding-right: 20px;
+
+      &:after {
+        opacity: 1;
+        right: 0px;
+      }
+    }
+  }
+}
+
+.btn-animation--flip {
+  @include borderRadius(99px);
+
+  position: relative;
+  overflow: hidden;
+  height: 50px;
+  width: 200px;
+  display: inline-block;
+  text-align: center;
+
+  span {
+    position: absolute;
+    transition: top .3s;
+    -moz-transition: top .3s;
+    -webkit-transition: top .3s;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    left: 0;
+    line-height: 2.6;
+  }
+
+  .front {
+    top: 0;
+  }
+
+  .back {
+    top: -100px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &:hover {
+    background: $btn-primary__background;
+
+    .front {
+      top: 100px;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back {
+      top: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }

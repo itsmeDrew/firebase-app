@@ -1,0 +1,47 @@
+// slick overrides
+
+.slick-slider {
+  // overflow: hidden;
+}
+
+.slick-dots li {
+  button {
+    &:before, &:after {
+      @include font-size(16px);
+    }
+
+    &:before {
+      color: $grey;
+    }
+  }
+
+  &.slick-active {
+    button {
+      &:before {
+        color: $green;
+      }
+    }
+  }
+}
+
+.slick-arrows {
+  z-index: 9999;
+
+  &:before {
+    color: $white;
+  }
+}
+
+.slick-next {
+  @extend .slick-arrows;
+
+  right: 10px;
+
+
+}
+
+.slick-prev {
+  @extend .slick-arrows;
+
+  left: 10px;
+}
