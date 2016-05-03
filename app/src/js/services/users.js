@@ -6,7 +6,8 @@ app.service('users', UsersCtrl);
 
 function UsersCtrl ($firebaseAuth, config) {
   var vm = this;
-  var baseRef = new Firebase(config.baseDataURL);
+  var baseDataURL = config.baseDataURL;
+  var baseRef = new Firebase(baseDataURL);
   var baseAuth = $firebaseAuth(baseRef);
 
   vm.authHandler = authHandler;
@@ -39,11 +40,11 @@ function UsersCtrl ($firebaseAuth, config) {
           var _userId = authData.uid;
 
           if (authData && !snapshot.hasChild(_userId) && !vm.authenticated) {
-            console.log('new user');
+            // NEW USER
             setNewUser(_userList, _userId, authData);
             vm.authenticated = true;
           } else if (authData && snapshot.hasChild(_userId) && !vm.authenticated) {
-            console.log('returning user');
+            // RETURNING USER
             vm.authenticated = true;
           }
         });
@@ -52,11 +53,25 @@ function UsersCtrl ($firebaseAuth, config) {
   }
 
   function setNewUser(list, userId, authData) {
-    list.child(userId).set({
-      provider: authData.provider,
-      name: getName(authData),
-      userID: userId
-    });
+    var _adminList = baseRef.child("admins");
+
+    _adminList.once('value', function(snapshot) {
+      if (snapshot.hasChild(authData.uid)) {
+        list.child(userId).set({
+          provider: authData.provider,
+          name: getName(authData),
+          userID: userId,
+          role: 20
+        });
+      } else {
+        list.child(userId).set({
+          provider: authData.provider,
+          name: getName(authData),
+          userID: userId,
+          role: 10
+        });
+      }
+    })
   }
 
   function getName(authData) {

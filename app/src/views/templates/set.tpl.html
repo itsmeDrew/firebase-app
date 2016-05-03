@@ -9,7 +9,7 @@
       {{card.cardnumber}} {{card.name}}
       <div ng-if="user">
         <!-- IF USER DOES NOT HAVE CARD -->
-        <button ng-show="!card.hasCard && user" ng-click="set.addCardToUser(card)">Add Card</button>
+        <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, card)">Add Card</button>
       </div>
 
       <!-- IF USER HAS CARD -->
@@ -18,9 +18,9 @@
         ng-if="card.cardnumber === userCard.cardnumber"
         ng-init="userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false"
       >
-          <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty(updatedQty)">
-          <button ng-click="set.removeUserCard(userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
-          <button ng-click="set.addCardToUser(card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
+          <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty($event, set.currentSet, user, userCard, updatedQty)">
+          <button ng-click="set.setsService.removeUserCard(set.currentSet, user, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
+          <button ng-click="set.setsService.addCardToUser(set.currentSet, user, card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
       </div>
       <!-- END IF -->
 

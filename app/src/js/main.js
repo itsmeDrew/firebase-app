@@ -18,6 +18,7 @@ require('./controllers/DashboardCtrl');
 
 //DIRECTIVES
 require('./directives/routeClassnames');
+require('./directives/confirmClick');
 
 //SERVICES
 require('./services/sets');
@@ -34,6 +35,7 @@ var app = angular.module('App', [
   'App.Controller.Sets',
   'App.Controller.Dashboard',
   'App.Directive.RouteClassnames',
+  'App.Directive.ngConfirmClick',
   'App.Service.Sets',
   'App.Service.Users'
 ]);

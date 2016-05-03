@@ -4,23 +4,29 @@ var app = angular.module('App.Controller.Dashboard', []);
 
 app.controller('DashboardCtrl', DashboardCtrl);
 
-function DashboardCtrl ($stateParams, $state, $scope, sets) {
+function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   var vm = this;
+  var setsDataURL = config.setsDataURL;
 
+  vm.cardSubmitted = false;
   vm.addNewCard = addNewCard;
   vm.checkIfCardExists = checkIfCardExists;
   vm.cardTypes = [{name: 'standard set', value: 'standard-set'}, {name: 'standard set foil', value: 'standard-set-foil'}, {name: 'parallel set', value: 'parallel-set'} ];
-
-  console.log('Dashboard CTRL here');
+  vm.submit = submit;
+  vm.addSet = addSet;
+  vm.removeSet = removeSet;
 
   function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega) {
-    sets.addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega);
+    sets.addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega, function() {
+      vm.cardSubmitted = true;
+    });
+
     $scope.card = {};
     vm.cardExists = false;
   }
 
   function checkIfCardExists(cardnumber, set) {
-    var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + set.id + '/cards' );
+    var ref = new Firebase(setsDataURL + '/' + set.id + '/cards' );
 
     ref.orderByChild("cardnumber").equalTo(cardnumber).on("value", function(snapshot) {
       if(snapshot.val()) {
@@ -29,6 +35,23 @@ function DashboardCtrl ($stateParams, $state, $scope, sets) {
         vm.cardExists = false;
       }
     });
+  }
+
+  function submit(newName, set) {
+    var ref = new Firebase(setsDataURL + '/' + set.id );
+
+    ref.update({ name: newName });
+  }
+
+  function addSet(name, cards, date) {
+    sets.addNewSet(name, cards, date);
+    $scope.newSet = '';
+  }
+
+  function removeSet(set) {
+    var ref = new Firebase(setsDataURL + '/' + set.id );
+
+    ref.remove();
   }
 
 };
