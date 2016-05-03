@@ -37,6 +37,13 @@
 </section>
 <section class="submit-set">
   <ul class="set-list">
-    <li class="set-list__listing" ng-repeat="set in sets">{{set.name}}</li>
+    <li class="set-list__listing" ng-repeat="set in sets">
+      {{set.name}}
+      <a ng-click="editName = ! editName">edit name</a>
+      <form ng-submit="dashboard.submit(name, set); editName = ! editName" ng-show="editName">
+        <input ng-model="name" placeholder="new set name" type="text">
+        <input type="submit" id="submit" value="Submit" />
+      </form>
+    </li>
   </ul>
 </section>
