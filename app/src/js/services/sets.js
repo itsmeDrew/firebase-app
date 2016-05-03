@@ -40,7 +40,7 @@ function SetsCtrl ($firebaseObject, config) {
     return cardSets;
   }
 
-  function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega) {
+  function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega, callback) {
     var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/' + set.id + '/cards');
     var _newCardRef = ref.push();
 
@@ -53,7 +53,7 @@ function SetsCtrl ($firebaseObject, config) {
       mega: mega ||  false,
       typeOne: typeOne || null,
       typeTwo: typeTwo || null
-    });
+    }, callback());
   }
 
 };

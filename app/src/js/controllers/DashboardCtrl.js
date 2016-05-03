@@ -15,9 +15,13 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   vm.removeSet = removeSet;
 
   function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega) {
-    sets.addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega);
+    sets.addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega, onComplete);
     $scope.card = {};
     vm.cardExists = false;
+
+    function onComplete() {
+      vm.cardSubmitted = true;
+    }
   }
 
   function checkIfCardExists(cardnumber, set) {
