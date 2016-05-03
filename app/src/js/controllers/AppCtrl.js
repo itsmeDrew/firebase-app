@@ -6,7 +6,7 @@ app.controller('AppCtrl', AppCtrl);
 
 function AppCtrl ($scope, $state, users, sets, config) {
   var vm = this;
-  var ref = new Firebase(config.baseDataURL);
+  var setsRef = new Firebase(config.baseDataURL);
 
   vm.login = login;
   vm.logout = logout
@@ -14,7 +14,7 @@ function AppCtrl ($scope, $state, users, sets, config) {
 
   sets.getSets().$bindTo($scope, 'sets');
 
-  ref.onAuth(function(authData) {
+  setsRef.onAuth(function(authData) {
     setUser();
   });
 
