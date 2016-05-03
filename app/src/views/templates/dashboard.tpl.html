@@ -23,7 +23,7 @@
     <select ng-model="card.pokemon.type.two" ng-if="card.pokemon.rarity !== 'rare-holo-ex'" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
     </select>
   </div>
-  <a href="#" class="btn" ng-if="!dashboard.cardExists"
+  <a class="btn" ng-if="!dashboard.cardExists"
       ng-click="dashboard.addNewCard(
         card.pokemon.name,
         card.pokemon.cardnumber,
@@ -34,6 +34,7 @@
         card.pokemon.mega
       )">
   submit</a>
+  <strong ng-if="dashboard.cardSubmitted">success</strong>
 </section>
 <section class="submit-sets">
   <div class="edit-sets">
@@ -46,7 +47,7 @@
             <input ng-model="name" placeholder="new set name" type="text">
             <input type="submit" id="submit" value="Submit" />
           </form>
-          <a ng-click="dashboard.removeSet(set)">remove set</a>
+          <a confirmed-click="dashboard.removeSet(set);" ng-confirm-click="Are You Sure? This cannot be undone.">remove set</a>
         </div>
       </li>
     </ul>
@@ -60,5 +61,4 @@
       <input type="submit" id="submit" value="Submit" />
     </form>
   </div>
-
 </section>
