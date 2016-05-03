@@ -4,36 +4,33 @@ var app = angular.module('App.Controller.Sets', []);
 
 app.controller('SetsCtrl', SetsCtrl);
 
-function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray) {
+function SetsCtrl ($stateParams, $scope, $firebaseArray, config) {
   var vm = this;
-  var ref = new Firebase('https://mypokemonclub.firebaseio.com/setsAvailable/');
-  var _user = $scope.$parent.user ;
+  var usersDataURL = config.usersDataURL;
+  var setsRef = new Firebase(config.setsDataURL);
+  var user = $scope.$parent.user ;
 
-  ref.orderByChild("slug").equalTo($stateParams.setSlug).on("value", function(snapshot) {
+  setsRef.orderByChild("slug").equalTo($stateParams.setSlug).on("value", function(snapshot) {
     for (var key in snapshot.val()) {
       if (snapshot.val().hasOwnProperty(key)) {
-        vm.currentSet = snapshot.val()[key];
+        var _currentSet = snapshot.val()[key];
+        var _userSetsRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + _currentSet.slug + '/cards/' );
+
+        vm.currentSet = _currentSet;
         vm.addCardToUser = addCardToUser;
         vm.removeUserCard = removeUserCard;
         vm.updateQty = updateQty;
-
-        var _userSDF = 'https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id;
-
-        console.log(_user);
-
-        var userSetsRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' );
-
-        vm.userCards = $firebaseArray(userSetsRef);
+        vm.userCards = $firebaseArray(_userSetsRef);
 
         function addCardToUser(newCard, userCard) {
           if (userCard) {
-            var _userCardRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' + userCard.id);
+            var _userCardRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + vm.currentSet.slug + '/cards/' + userCard.id);
 
             _userCardRef.update({
               qty: userCard.qty + 1
             });
           } else {
-            var _newCardRef = userSetsRef.push();
+            var _newCardRef = _userSetsRef.push();
 
             _newCardRef.set({
               cardnumber: newCard.cardnumber,
@@ -42,18 +39,18 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseObject, $firebaseArray
               qty: 1,
               id: _newCardRef.key()
             });
-            console.log('added new card', newCard);
           }
         }
 
         function removeUserCard(userCard) {
-          var _userCardRef = new Firebase('https://mypokemonclub.firebaseio.com/users/facebook:' + _user.id + '/sets/' + vm.currentSet.slug + '/cards/' + userCard.id);
+          var _userCard = userCard;
+          var _userCardRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + vm.currentSet.slug + '/cards/' + _userCard.id);
 
           _userCardRef.update({
-            qty: userCard.qty - 1
+            qty: _userCard.qty - 1
           });
 
-          if (userCard.qty < 1) {
+          if (_userCard.qty < 1) {
             _userCardRef.remove();
           }
 
