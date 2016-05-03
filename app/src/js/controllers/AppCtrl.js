@@ -22,18 +22,22 @@ function AppCtrl ($scope, $state, users, sets, config) {
     $state.go("app", {}, {reload: true});
   }
 
+  $scope.$on('nav.toggle', function() {
+    vm.menuOpen = ! vm.menuOpen;
+  });
+
+  $scope.$on('state.reload', function() {
+    $state.go($state.current, {}, {reload: true});
+  });
+
   function login() {
-    users.login(reloadState);
+    users.login($scope.$emit('state.reload'));
   }
 
   function logout() {
     users.logout();
     $scope.user = '';
     $state.go("app", {}, {reload: true});
-  }
-
-  function reloadState() {
-    $state.go($state.current, {}, {reload: true});
   }
 
   function setUser() {
