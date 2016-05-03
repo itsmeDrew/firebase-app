@@ -27,17 +27,21 @@ function AppCtrl ($scope, $state, users, sets, config) {
   });
 
   $scope.$on('state.reload', function() {
-    $state.go($state.current, {}, {reload: true});
+    reloadState();
   });
 
   function login() {
-    users.login($scope.$emit('state.reload'));
+    users.login(reloadState);
   }
 
   function logout() {
     users.logout();
     $scope.user = '';
     $state.go("app", {}, {reload: true});
+  }
+
+  function reloadState() {
+    $state.go($state.current, {}, {reload: true});
   }
 
   function setUser() {
