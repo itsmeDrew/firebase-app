@@ -11,6 +11,7 @@ function SetsCtrl ($firebaseObject, config) {
   vm.addNewCard = addNewCard;
   vm.addNewSet = addNewSet;
   vm.getSets = getSets;
+  vm.getSetBySlug = getSetBySlug;
 
   function addNewSet(name, numberofcards, releaseDate) {
     var _newSetRef = setsRef.push();
@@ -52,6 +53,17 @@ function SetsCtrl ($firebaseObject, config) {
       typeOne: typeOne || null,
       typeTwo: typeTwo || null
     }, callback());
+  }
+
+  function getSetBySlug(slug, callback) {
+    setsRef.orderByChild("slug").equalTo(slug).on("value", function(snapshot) {
+      for (var key in snapshot.val()) {
+        if (snapshot.val().hasOwnProperty(key)) {
+          callback(snapshot.val()[key]);
+        }
+      }
+    });
+
   }
 
 };
