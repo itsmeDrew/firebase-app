@@ -34,8 +34,6 @@ function UsersCtrl ($firebaseAuth, config) {
       if (authData) {
         var _userList = ref.child("users");
 
-        console.log(isAdmin(authData.uid), authData.uid);
-
         vm.authenticated = false;
 
         _userList.once('value', function(snapshot) {
