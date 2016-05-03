@@ -54,14 +54,6 @@ function UsersCtrl ($firebaseAuth, config) {
     });
   }
 
-  function isAdmin(id) {
-    var _adminList = baseRef.child("admins");
-
-    _adminList.once('value', function(snapshot) {
-      return true;
-    })
-  }
-
   function setNewUser(list, userId, authData) {
     var _adminList = baseRef.child("admins");
 
@@ -82,8 +74,6 @@ function UsersCtrl ($firebaseAuth, config) {
         });
       }
     })
-
-
   }
 
   function getName(authData) {
