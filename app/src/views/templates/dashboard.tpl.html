@@ -1,5 +1,5 @@
 <section class="submit-card">
-  <h2>SUBMIT A CARD</h2>
+  <!-- <h2>SUBMIT A CARD</h2> -->
   <div class="step">
     <select ng-options="set as set.name for set in sets" ng-model="card.set"></select>
   </div>
@@ -35,15 +35,30 @@
       )">
   submit</a>
 </section>
-<section class="submit-set">
-  <ul class="set-list">
-    <li class="set-list__listing" ng-repeat="set in sets">
-      {{set.name}}
-      <a ng-click="editName = ! editName">edit name</a>
-      <form ng-submit="dashboard.submit(name, set); editName = ! editName" ng-show="editName">
-        <input ng-model="name" placeholder="new set name" type="text">
-        <input type="submit" id="submit" value="Submit" />
-      </form>
-    </li>
-  </ul>
+<section class="submit-sets">
+  <div class="edit-sets">
+    <ul class="set-list">
+      <li class="set-list__listing" ng-repeat="set in sets">
+        {{set.name}}
+        <a ng-click="editName = ! editName">edit</a>
+        <div class="edit" ng-show="editName">
+          <form ng-submit="dashboard.submit(name, set); editName = ! editName">
+            <input ng-model="name" placeholder="new set name" type="text">
+            <input type="submit" id="submit" value="Submit" />
+          </form>
+          <a ng-click="dashboard.removeSet(set)">remove set</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="add-sets">
+    <a class="btn-solid--primary" ng-click="addNewSet = ! addNewSet">add set</a>
+    <form ng-submit="dashboard.addSet(newSet.name, newSet.cards, newSet.date); addNewSet = ! addNewSet" ng-show="addNewSet">
+      <input ng-model="newSet.name" placeholder="set name" type="text">
+      <input ng-model="newSet.cards" placeholder="card number" type="text">
+      <input ng-model="newSet.date" placeholder="release date" type="text">
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+  </div>
+
 </section>

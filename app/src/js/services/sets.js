@@ -4,11 +4,25 @@ var app = angular.module('App.Service.Sets', []);
 
 app.service('sets', SetsCtrl);
 
-function SetsCtrl ($firebaseObject) {
+function SetsCtrl ($firebaseObject, config) {
   var vm = this;
 
   vm.addNewCard = addNewCard;
+  vm.addNewSet = addNewSet;
   vm.getSets = getSets;
+
+  function addNewSet(name, numberofcards, releaseDate, ref) {
+    var ref = new Firebase(config.baseDataURL + '/setsAvailable')
+    var _newSetRef = ref.push();
+
+    _newSetRef.set({
+      name: name,
+      id: _newSetRef.key(),
+      numberofcards: numberofcards,
+      slug: genSlug(name),
+      releasedate: releaseDate
+    });
+  }
 
   function genSlug(data) {
     return data

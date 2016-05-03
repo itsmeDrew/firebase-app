@@ -11,6 +11,8 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   vm.checkIfCardExists = checkIfCardExists;
   vm.cardTypes = [{name: 'standard set', value: 'standard-set'}, {name: 'standard set foil', value: 'standard-set-foil'}, {name: 'parallel set', value: 'parallel-set'} ];
   vm.submit = submit;
+  vm.addSet = addSet;
+  vm.removeSet = removeSet;
 
   function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega) {
     sets.addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega);
@@ -34,6 +36,17 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
     var ref = new Firebase(config.baseDataURL + '/setsAvailable/' + set.id );
 
     ref.update({ name: newName });
+  }
+
+  function addSet(name, cards, date) {
+    sets.addNewSet(name, cards, date);
+    $scope.newSet = '';
+  }
+
+  function removeSet(set) {
+    var ref = new Firebase(config.baseDataURL + '/setsAvailable/' + set.id );
+
+    ref.remove();
   }
 
 };
