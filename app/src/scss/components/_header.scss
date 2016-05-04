@@ -5,6 +5,28 @@
   padding: 1rem;
 }
 
+.header-profile__dropdown-menu {
+  @include boxShadow(0 0 10px rgba(0,0,0,0.7));
+  @include transition(all $base-animation__speed);
+  @include centerVertical();
+
+  position: absolute;
+  top: 60px;
+  height: 0;
+  width: 180px;
+  background: $white;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.header-profile__dropdown-content {
+  @include centerAll();
+
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
 .header-logo {
   width: 140px;
   height: 40px;
@@ -18,23 +40,14 @@
 
   &.highlight {
     .header-profile__dropdown-menu {
-      @include boxShadow(0 0 10px rgba(0,0,0,0.7));
-      @include centerVertical();
-
-      display: block;
-      position: absolute;
-      background: $white;
-      top: 60px;
-      padding: 20px;
-      width: 180px;
+      opacity: 1;
+      visibility: visible;
+      height: 140px;
 
       &:before {
         @include arrowUp(10px, $white);
         @include centerVertical();
 
-        content: "";
-        display: block;
-        position: absolute;
         top: -10px;
       }
     }
@@ -49,6 +62,7 @@
   height: 43px;
   overflow: hidden;
   opacity: 0.7;
+  cursor: pointer;
 
   &:hover {
     opacity: 1;
@@ -70,10 +84,4 @@
 
 .header-login__btn:hover {
   background: darken($yellow, 10%);
-}
-
-//dropdown menu
-
-.header-profile__dropdown-menu {
-  display: none;
 }
