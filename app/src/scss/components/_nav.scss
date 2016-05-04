@@ -24,7 +24,7 @@
     &:before {
       @include arrowUp(10px, $nav-desktop__background);
 
-      right: 20px;
+      right: 24px;
       top: -10px;
     }
   }
@@ -39,7 +39,7 @@
 .site-nav__link {
   @include font-size(20px);
 
-  color: $white;
+  color: $black;
   text-transform: capitalize;
   padding: 1rem 0;
   display: block;
@@ -114,8 +114,21 @@
   transition: all $base-animation__speed;
 
   &:hover {
-    border-color: rgba(255,255,255,1);
+    border-color: $nav-desktop__background;
+    background: $nav-desktop__background;
     opacity: 1;
+
+    span {
+      background: $black;
+
+      &:before {
+        background: $black;
+      }
+
+      &:after {
+        background: $black;
+      }
+    }
   }
 
   span {
@@ -168,7 +181,7 @@
 }
 
 .menu-active .site-nav__hamburger {
-  background: rgba(0,0,0,0.3);
+  background: $base-color--triad;
   border-color: $nav-bars__color--hover;
   opacity: 1;
 
@@ -176,11 +189,13 @@
     background-color: transparent;
 
     &:before {
+      background: $black;
       top: 0;
       transform: rotate(45deg);
     }
 
     &:after {
+      background: $black;
       top: 0;
       transform: rotate(-45deg);
     }
