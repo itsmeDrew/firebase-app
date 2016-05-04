@@ -55,8 +55,15 @@
 ///////////////////////////////
 
 
-@mixin transition($transition) {
-  transition: $transition;
-  -moz-transition: $transition;
-  -webkit-transition: $transition;
+@mixin transition($transition, $transition2:"") {
+  @if($transition2 != "") {
+    transition: $transition, $transition2;
+    -moz-transition: $transition, $transition2;
+    -webkit-transition: $transition, $transition2;
+  } @else {
+    transition: $transition;
+    -moz-transition: $transition;
+    -webkit-transition: $transition;
+  }
+
 }

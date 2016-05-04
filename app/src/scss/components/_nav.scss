@@ -1,19 +1,190 @@
-.nav {
-  @include centerHorizontal();
+.site-nav__nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  text-align: right;
+  visibility: hidden;
+  opacity: 0;
+  transition: all $base-animation__speed;
+  z-index: 200;
 
-  padding: 0 1rem;
+  @include breakpointSmallerThan($breakpoint--medium) {
+    height: 0;
+    left: 0;
+    overflow-y: scroll;
+  }
+
+  @include breakpointLargerThan($breakpoint--medium) {
+    @include borderRadius($base-border__radius);
+    @include boxShadow(0 0 7px rgba(0,0,0,0.5));
+
+    background: $nav-desktop__background;
+
+    &:before {
+      @include arrowUp(10px, $nav-desktop__background);
+
+      right: 24px;
+      top: -10px;
+    }
+  }
+}
+
+.menu {
+  float: right;
+  margin: 0 1rem;
+  z-index: 9999;
+}
+
+.site-nav__link {
+  @include font-size(20px);
+
+  text-transform: capitalize;
+  padding: 1rem 0;
+  display: block;
+
+  @include breakpointSmallerThan($breakpoint--small) {
+    @include font-size(10vw, 30px);
+  }
+
+  @include breakpointBetween($breakpoint--small, $breakpoint--medium) {
+    @include font-size(7vw, 40px);
+  }
+
+  @include breakpointSmallerThan($breakpoint--medium) {
+    text-align: center;
+    color: $white;
+
+    &:hover {
+      color: $nav-bars__color--hover;
+    }
+  }
+
+  @include breakpointLargerThan($breakpoint--medium) {
+    color: $black;
+    padding: 1rem 2rem;
+    text-align: left;
+
+    &:hover {
+      color: $base-color--primary;
+    }
+  }
+}
+
+// hamburger animation
+
+.hamburger__bars {
+  @include borderRadius($nav-bars__border-radius);
+
+  cursor: pointer;
+  height: $nav-bars__height;
+  width: $nav-bars__width;
+  background: $nav-bars__color;
+  position: absolute;
+  display: block;
+  content: '';
+  transition: all $base-animation__speed ease-in-out;
+}
+
+.site-nav__hamburger {
+  @include borderRadius(99px);
+
   position: relative;
-  float: left;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  padding: 18px 29px 21px 10px;
+  z-index: 9999;
+  border: 2px solid rgba(255,255,255,0.3);
+  float: right;
+  opacity: 0.7;
+  transition: all $base-animation__speed;
+
+  &:hover {
+    border-color: $nav-desktop__background;
+    background: $nav-desktop__background;
+    opacity: 1;
+
+    span {
+      background: $black;
+
+      &:before {
+        background: $black;
+      }
+
+      &:after {
+        background: $black;
+      }
+    }
+  }
+
+  span {
+    @extend .hamburger__bars;
+
+    &:before {
+      @extend .hamburger__bars;
+
+      top: -6px;
+    }
+
+    &:after {
+      @extend .hamburger__bars;
+
+      bottom: -6px;
+    }
+  }
 }
 
-.nav-item__link {
-  color: $white;
-  padding-bottom: .5rem;
-  border-bottom: 0px solid $blue;
-  transition: .15s all ease-in;
+// mobile menu active
+
+.menu-active {
+  @include breakpointSmallerThan($breakpoint--medium) {
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 }
 
-.nav-item__link:hover {
-  color: $white;
-  border-bottom: 4px solid $yellow;
+.menu-active .site-nav__nav {
+  @include breakpointSmallerThan($breakpoint--medium) {
+    background: $nav-mobile__background;
+    padding: 7rem 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+  }
+
+  @include breakpointLargerThan($breakpoint--medium) {
+    background: $nav-desktop__background;
+    top: 75px;
+    right: 20px;
+  }
+
+  position: absolute;
+  visibility: visible;
+  opacity: 1;
+  z-index: 100;
+}
+
+.menu-active .site-nav__hamburger {
+  background: $base-color--triad;
+  border-color: $nav-bars__color--hover;
+  opacity: 1;
+
+  span {
+    background-color: transparent;
+
+    &:before {
+      background: $black;
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      background: $black;
+      top: 0;
+      transform: rotate(-45deg);
+    }
+  }
 }

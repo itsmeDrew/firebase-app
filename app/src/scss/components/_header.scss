@@ -1,46 +1,80 @@
 .header {
   @include cf();
 
-  background: $blue;
+  background: $black;
   padding: 1rem;
-  position: relative;
-  height: 95px;
+}
+
+.header-profile__dropdown-menu {
+  @include boxShadow(0 0 10px rgba(0,0,0,0.7));
+  @include transition(all $base-animation__speed);
+  @include centerVertical();
+
+  position: absolute;
+  top: 60px;
+  height: 0;
+  width: 180px;
+  background: $white;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.header-profile__dropdown-content {
+  @include centerAll();
+
+  position: absolute;
+  width: 100%;
+  text-align: center;
 }
 
 .header-logo {
-  height: 100%;
+  width: 140px;
+  height: 40px;
 
   float: left;
 }
 
-.header-login {
-  @include centerHorizontal();
-
+.header-profile {
   float: right;
   position: relative;
+
+  &.highlight {
+    .header-profile__dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      height: 140px;
+
+      &:before {
+        @include arrowUp(10px, $white);
+        @include centerVertical();
+
+        top: -10px;
+      }
+    }
+  }
 }
 
-.header-login__content {
-  float: left;
-  margin-left: .675rem;
-}
+.header-profile__img--wrapper {
+  @include borderRadius(99px);
 
-.header-login__profile-img--wrapper {
   float: left;
-  width: 48px;
-  height: 48px;
+  width: 43px;
+  height: 43px;
   overflow: hidden;
-  border-radius: 99px;
-  -moz-border-radius: 99px;
-  -webkit-border-radius: 99px;
+  opacity: 0.7;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
-.header-login__message {
-  color: $white;
-  margin: 0;
+.header-profile__display-name {
+  display: block;
+  padding: .5rem 0;
 }
 
-.header-login__btn {
+.header-profile__btn {
   @include font-size(10px);
 
   background: $yellow;

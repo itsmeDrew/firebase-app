@@ -14,7 +14,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
         },
         'nav@app': {
           templateUrl: 'partials/_nav.html',
-          controller: 'NavCtrl'
+          controller: 'NavCtrl',
+          controllerAs: 'nav'
         },
         'content': {
           templateUrl: 'templates/home.tpl.html',

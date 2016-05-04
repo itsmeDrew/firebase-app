@@ -1,8 +1,7 @@
-<nav>
-  <ul>
-    <li>
-      <a class="nav-item__link" ui-sref=".category()">View Sets</a>
-      <a class="nav-item__link" ui-sref=".dashboard()" ng-if="user.role === 99">Dashboard</a>
-    </li>
-  </ul>
+<nav class="site-nav__nav">
+  <a class="site-nav__link" ui-sref=".category()" ui-sref-active="active">View Sets</a>
+  <a class="site-nav__link" ui-sref=".dashboard()" ui-sref-active="active" ng-if="user.role === 99">Dashboard</a>
 </nav>
+<div class="menu">
+  <a class="site-nav__hamburger" ng-click="nav.toggleNav()"><span></span></a>
+</div>
