@@ -3,43 +3,60 @@
 
   background: $black;
   padding: 1rem;
-  height: 95px;
 }
 
 .header-logo {
-  height: 100%;
+  width: 140px;
+  height: 40px;
 
   float: left;
 }
 
-.header-login {
-  @include centerHorizontal();
-
+.header-profile {
   float: right;
   position: relative;
+
+  &:hover {
+    .header-profile__dropdown-menu {
+      @include boxShadow(0 0 10px rgba(0,0,0,0.7));
+      @include centerVertical();
+
+      display: block;
+      position: absolute;
+      background: $white;
+      top: 100%;
+      padding: 20px;
+      width: 180px;
+
+      &:before {
+        @include arrowUp(10px, $white);
+
+        content: "";
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: 10px;
+      }
+    }
+  }
 }
 
-.header-login__content {
+.header-profile__img--wrapper {
   float: left;
-  margin-left: .675rem;
-}
-
-.header-login__profile-img--wrapper {
-  float: left;
-  width: 48px;
-  height: 48px;
+  width: 43px;
+  height: 43px;
   overflow: hidden;
   border-radius: 99px;
   -moz-border-radius: 99px;
   -webkit-border-radius: 99px;
 }
 
-.header-login__message {
-  color: $white;
-  margin: 0;
+.header-profile__display-name {
+  display: block;
+  padding: .5rem 0;
 }
 
-.header-login__btn {
+.header-profile__btn {
   @include font-size(10px);
 
   background: $yellow;
@@ -49,4 +66,10 @@
 
 .header-login__btn:hover {
   background: darken($yellow, 10%);
+}
+
+//dropdown menu
+
+.header-profile__dropdown-menu {
+  display: none;
 }
