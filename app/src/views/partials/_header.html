@@ -1,13 +1,14 @@
 <header class="header">
   <img class="header-logo" src="http://www.placehold.it/500x400" alt="logo">
   <div class="nav" ui-view="nav"></div>
-  <div class="header-profile" ng-if="user">
-    <div class="header-profile__img--wrapper">
-      <img class="header-profile__img" src="{{ user.profileImageURL }}" alt="">
-    </div>
-    <div class="header-profile__dropdown-menu">
+  <div class="header-profile" ng-if="user" ng-class="myclass">
+    <div class="header-profile__dropdown-menu" ng-mouseleave="myclass = ''">
       <span class="header-profile__display-name" ng-show="user">{{ user.displayName }}</span>
       <button class="header-profile__btn btn-solid--primary" ng-show="user" ng-click="app.logout()">logout</button>
     </div>
+    <div class="header-profile__img--wrapper" ng-mouseenter="myclass = 'highlight'">
+      <img class="header-profile__img" src="{{ user.profileImageURL }}" alt="logo">
+    </div>
+
   </div>
 </header>
