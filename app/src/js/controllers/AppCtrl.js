@@ -4,9 +4,10 @@ var app = angular.module('App.Controller.App', []);
 
 app.controller('AppCtrl', AppCtrl);
 
-function AppCtrl ($scope, $state, users, sets, config) {
+function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
   var vm = this;
   var setsRef = new Firebase(config.baseDataURL);
+
 
   vm.login = login;
   vm.logout = logout
@@ -49,6 +50,13 @@ function AppCtrl ($scope, $state, users, sets, config) {
 
     if (authData) {
       $scope.user = authData.facebook;
+
+      var user = $scope.user;
+      var userRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/role');
+
+      userRef.once("value", function(snapshot) {
+        $scope.user.role = snapshot.val();
+      })
     }
   }
 

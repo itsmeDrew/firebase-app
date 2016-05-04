@@ -2,7 +2,7 @@
   <ul>
     <li>
       <a class="nav-item__link" ui-sref=".category()">View Sets</a>
-      <a class="nav-item__link" ui-sref=".dashboard()">Dashboard</a>
+      <a class="nav-item__link" ui-sref=".dashboard()" ng-if="user.role === 99">Dashboard</a>
     </li>
   </ul>
 </nav>

@@ -4,7 +4,7 @@ var app = angular.module('App.Controller.Sets', []);
 
 app.controller('SetsCtrl', SetsCtrl);
 
-function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, config, sets) {
+function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, $firebaseObject, config, sets) {
   var vm = this;
   var usersDataURL = config.usersDataURL;
   var setsRef = new Firebase(config.setsDataURL);

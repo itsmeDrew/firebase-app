@@ -61,7 +61,7 @@ function UsersCtrl ($firebaseAuth, config) {
           provider: authData.provider,
           name: getName(authData),
           userID: userId,
-          role: 20
+          role: 99
         });
       } else {
         list.child(userId).set({
