@@ -15,6 +15,9 @@ $base-font__family--serif: 'Arvo', 'Times New Roman', serif;
 $base-font__family--sans-serif: 'Lato', arial, sans-serif;
 $base-font__size: 16px;
 $base-line-height: 1.5;
+$base-color--primary: $blue;
+$base-color--secondary: $orange;
+$base-color--triad: $yellow;
 
 ///////////////////////////////
 /// PATHS
@@ -42,9 +45,9 @@ $header-main__bg-color: $white;
 $btn__font-size: $base-font__size;
 $btn__border-radius: $base-border__radius;
 $btn__padding: 1.5vw;
-$btn-primary__background: $blue;
+$btn-primary__background: $base-color--primary;
 $btn-primary__color: $white;
-$btn-secondary__background: $orange;
+$btn-secondary__background: $base-color--secondary;
 $btn-secondary__color: $white;
 $btn-border__width: 2px;
 
@@ -59,8 +62,9 @@ $base-animation__speed: 200ms;
 ///////////////////////////////
 
 $nav-mobile__background: $black;
-$nav-desktop__background: $green;
+$nav-desktop__background: $base-color--secondary;
 $nav-bars__color: $white;
+$nav-bars__color--hover: $nav-desktop__background;
 $nav-bars__height: 2px;
 $nav-bars__width: 20px;
 $nav-bars__border-radius: 1px;
