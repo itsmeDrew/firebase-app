@@ -21,7 +21,7 @@
     };
   </script>
 </head>
-<body ng-controller="AppCtrl as app" data-ng-class="{ login: !user, 'menu-active': app.menuOpen && ! app.profileOpen }" route-classnames>
+<body ng-controller="AppCtrl as app" data-ng-class="{ login: !user, 'menu-active': app.menuOpen}" route-classnames>
 
   <div ng-if="user" ui-view="header"></div>
   <div ui-view="content"></div>

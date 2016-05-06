@@ -1,15 +1,13 @@
 <header class="header">
   <img class="header-logo" src="http://www.placehold.it/500x400" alt="logo">
   <div class="nav" ui-view="nav"></div>
-  <div class="header-profile" ng-if="user" ng-class="{'profile-is-open': openProfile}">
-    <div class="header-profile__dropdown-menu" ng-mouseleave="openProfile = ''">
+  <div class="header-profile" ng-if="user" ng-class="{'profile-is-open': app.profileOpen}">
+    <div class="header-profile__dropdown-menu">
       <div class="header-profile__dropdown-content">
-        <span class="header-profile__display-name" ng-show="user">{{ user.displayName }}</span>
+        <span class="header-profile__display-name">{{ user.displayName }}</span>
         <button class="header-profile__btn btn-solid--primary" ng-show="user" ng-click="app.logout()">logout</button>
       </div>
     </div>
-    <div class="header-profile__img--wrapper" ng-click="openProfile = ! openProfile">
-      <img class="header-profile__img" src="{{ user.profileImageURL }}" alt="logo">
-    </div>
+    <nav-profile ng-click="profile.toggleProfile"></nav-profile>
   </div>
 </header>
