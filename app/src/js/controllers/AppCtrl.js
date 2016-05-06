@@ -11,7 +11,9 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
 
   vm.login = login;
   vm.logout = logout;
+  vm.toggleProfile = $scope.$emit('nav.toggle');
   vm.menuOpen = false;
+  vm.profileOpen = false;
   vm.closeNav = closeNav;
   $scope.user = '';
 
@@ -31,6 +33,10 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
 
   $scope.$on('nav.toggle', function() {
     vm.menuOpen = ! vm.menuOpen;
+  });
+
+  $scope.$on('profile.toggle', function() {
+    vm.profileOpen = ! vm.profileOpen;
   });
 
   function login() {
