@@ -50,6 +50,40 @@
   }
 }
 
+@mixin hamburger-rotate-top() {
+  @include keyframes(hamburger-top) {
+    0% {
+      @include rotate(0);
+      top: -6px;
+    }
+    50% {
+      @include rotate(0);
+      top: 0;
+    }
+    100% {
+      @include rotate(45);
+      top: 0;
+    }
+  }
+}
+
+@mixin hamburger-rotate-bottom() {
+  @include keyframes(hamburger-bottom) {
+    0% {
+      @include rotate(0);
+      bottom: -6px;
+    }
+    50% {
+      @include rotate(0);
+      bottom: 0;
+    }
+    100% {
+      @include rotate(-45);
+      bottom: 0;
+    }
+  }
+}
+
 ///////////////////////////////
 /// TRANSITIONS
 ///////////////////////////////
