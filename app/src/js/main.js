@@ -11,6 +11,7 @@ require('slick-carousel');
 
 // CONTROLLERS
 require('./controllers/HomeCtrl');
+require('./controllers/HeaderCtrl');
 require('./controllers/NavCtrl');
 require('./controllers/CategoryCtrl');
 require('./controllers/SetsCtrl');
@@ -32,6 +33,7 @@ var app = angular.module('App', [
   'slickCarousel',
   'App.Controller.Nav',
   'App.Controller.Home',
+  'App.Controller.Header',
   'App.Controller.Category',
   'App.Controller.Sets',
   'App.Controller.Dashboard',
