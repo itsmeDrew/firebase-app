@@ -5,7 +5,7 @@
   padding: 1rem;
 }
 
-.header-profile__dropdown-menu {
+.profile-menu__dropdown-menu {
   @include boxShadow(0 0 10px rgba(0,0,0,0.7));
   @include transition(all $base-animation__speed);
   @include centerVertical();
@@ -19,7 +19,7 @@
   opacity: 0;
 }
 
-.header-profile__dropdown-content {
+.profile-menu__dropdown-content {
   @include centerAll();
 
   position: absolute;
@@ -34,12 +34,12 @@
   float: left;
 }
 
-.header-profile {
+.profile-menu {
   float: right;
   position: relative;
 
   &.profile-is-open {
-    .header-profile__dropdown-menu {
+    .profile-menu__dropdown-menu {
       opacity: 1;
       visibility: visible;
       height: 140px;
@@ -54,7 +54,7 @@
   }
 }
 
-.header-profile__img--wrapper {
+.profile-menu__img--wrapper {
   @include borderRadius(99px);
 
   float: left;
@@ -69,12 +69,12 @@
   }
 }
 
-.header-profile__display-name {
+.profile-menu__display-name {
   display: block;
   padding: .5rem 0;
 }
 
-.header-profile__btn {
+.profile-menu__btn {
   @include font-size(10px);
 
   background: $yellow;
