@@ -1,0 +1,11 @@
+<div class="profile-menu">
+  <div class="profile-menu__dropdown-menu">
+    <div class="profile-menu__dropdown-content">
+      <span class="profile-menu__display-name">{{ user.displayName }}</span>
+      <button class="profile-menu__btn btn-solid--primary" ng-show="user" ng-click="app.logout()">logout</button>
+    </div>
+  </div>
+  <div class="profile-menu__img--wrapper" ng-click="header.toggleProfile();">
+    <user-profile-pic class="profile-menu__img"></user-profile-pic>
+  </div>
+</div>

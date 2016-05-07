@@ -123,14 +123,16 @@
 
     &:before {
       @extend .hamburger__bars;
+      @include animation('300ms hamburger-top-out forwards');
 
-      top: -6px;
+      // top: -6px;
     }
 
     &:after {
       @extend .hamburger__bars;
+      @include animation('300ms hamburger-bottom-out forwards');
 
-      bottom: -6px;
+      // bottom: -6px;
     }
   }
 }
@@ -176,15 +178,15 @@
     background-color: transparent;
 
     &:before {
+      @include animation('300ms hamburger-top-in forwards');
+
       background: $black;
-      top: 0;
-      transform: rotate(45deg);
     }
 
     &:after {
+      @include animation('300ms hamburger-bottom-in forwards');
+
       background: $black;
-      top: 0;
-      transform: rotate(-45deg);
     }
   }
 }

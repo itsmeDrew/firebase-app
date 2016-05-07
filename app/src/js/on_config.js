@@ -10,7 +10,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
       url: '/',
       views: {
         'header': {
-          templateUrl: 'partials/_header.html'
+          templateUrl: 'partials/_header.html',
+          controller: 'headerCtrl',
+          controllerAs: 'header'
         },
         'nav@app': {
           templateUrl: 'partials/_nav.html',

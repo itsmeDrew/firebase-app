@@ -11,14 +11,20 @@ require('slick-carousel');
 
 // CONTROLLERS
 require('./controllers/HomeCtrl');
+require('./controllers/HeaderCtrl');
 require('./controllers/NavCtrl');
 require('./controllers/CategoryCtrl');
 require('./controllers/SetsCtrl');
 require('./controllers/DashboardCtrl');
 
 //DIRECTIVES
+require('./directives/logo');
 require('./directives/routeClassnames');
 require('./directives/confirmClick');
+require('./directives/nav/nav-main');
+require('./directives/nav/profile');
+require('./directives/nav/hamburger');
+require('./directives/user/profile-pic');
 
 //SERVICES
 require('./services/sets');
@@ -31,11 +37,17 @@ var app = angular.module('App', [
   'slickCarousel',
   'App.Controller.Nav',
   'App.Controller.Home',
+  'App.Controller.Header',
   'App.Controller.Category',
   'App.Controller.Sets',
   'App.Controller.Dashboard',
+  'App.Directive.Logo',
   'App.Directive.RouteClassnames',
   'App.Directive.ngConfirmClick',
+  'App.Directive.Nav.Profile',
+  'App.Directive.Nav.Hamburger',
+  'App.Directive.Nav.Main',
+  'App.Directive.User.ProfilePic',
   'App.Service.Sets',
   'App.Service.Users'
 ]);

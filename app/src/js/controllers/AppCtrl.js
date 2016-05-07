@@ -11,8 +11,6 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
 
   vm.login = login;
   vm.logout = logout;
-  vm.menuOpen = false;
-  vm.closeNav = closeNav;
   $scope.user = '';
 
   sets.getSets().$bindTo($scope, 'sets');
@@ -27,10 +25,6 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
 
   $scope.$on('state.reload', function() {
     reloadState();
-  });
-
-  $scope.$on('nav.toggle', function() {
-    vm.menuOpen = ! vm.menuOpen;
   });
 
   function login() {
@@ -59,14 +53,6 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
       userRef.once("value", function(snapshot) {
         $scope.user.role = snapshot.val();
       })
-    }
-  }
-
-  function closeNav(clickEvent) {
-    var _parentClass = clickEvent.target.offsetParent.className;
-
-    if (vm.menuOpen === true && _parentClass !== 'menu ng-scope' && _parentClass !== 'site-nav__nav ng-scope'&& _parentClass !== 'ng-scope menu-active') {
-      $scope.$emit('nav.toggle');
     }
   }
 
