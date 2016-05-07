@@ -14,7 +14,9 @@ function headerCtrl ($scope, $rootScope) {
   vm.toggleProfile = toggleProfile;
 
   $rootScope.$on("$stateChangeSuccess", function() {
-    toggleNav();
+    if (vm.menuOpen) {
+      toggleNav();
+    }
   })
 
   function toggleNav() {
