@@ -20,7 +20,9 @@ require('./controllers/DashboardCtrl');
 //DIRECTIVES
 require('./directives/routeClassnames');
 require('./directives/confirmClick');
+require('./directives/nav/nav-main');
 require('./directives/nav/profile');
+require('./directives/nav/hamburger');
 
 //SERVICES
 require('./services/sets');
@@ -40,6 +42,8 @@ var app = angular.module('App', [
   'App.Directive.RouteClassnames',
   'App.Directive.ngConfirmClick',
   'App.Directive.Nav.Profile',
+  'App.Directive.Nav.Hamburger',
+  'App.Directive.Nav.Main',
   'App.Service.Sets',
   'App.Service.Users'
 ]);

@@ -11,7 +11,13 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
 
   vm.login = login;
   vm.logout = logout;
+  vm.banjo = banjo;
   $scope.user = '';
+
+  function banjo() {
+    console.log('app here');
+    $scope.$emit('header.toggleNav');
+  }
 
   sets.getSets().$bindTo($scope, 'sets');
 
