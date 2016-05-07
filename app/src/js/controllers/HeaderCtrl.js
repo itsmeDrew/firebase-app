@@ -4,7 +4,7 @@ var app = angular.module('App.Controller.Header', []);
 
 app.controller('headerCtrl', headerCtrl);
 
-function headerCtrl ($scope) {
+function headerCtrl ($scope, $rootScope) {
   var vm = this;
 
   vm.menuOpen = false;
@@ -12,6 +12,10 @@ function headerCtrl ($scope) {
   vm.closeNav = closeNav;
   vm.toggleNav = toggleNav;
   vm.toggleProfile = toggleProfile;
+
+  $rootScope.$on("$stateChangeSuccess", function() {
+    toggleNav();
+  })
 
   function toggleNav() {
     vm.menuOpen = ! vm.menuOpen;
