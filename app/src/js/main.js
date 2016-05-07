@@ -24,6 +24,7 @@ require('./directives/confirmClick');
 require('./directives/nav/nav-main');
 require('./directives/nav/profile');
 require('./directives/nav/hamburger');
+require('./directives/user/profile-pic');
 
 //SERVICES
 require('./services/sets');
@@ -46,6 +47,7 @@ var app = angular.module('App', [
   'App.Directive.Nav.Profile',
   'App.Directive.Nav.Hamburger',
   'App.Directive.Nav.Main',
+  'App.Directive.User.ProfilePic',
   'App.Service.Sets',
   'App.Service.Users'
 ]);
