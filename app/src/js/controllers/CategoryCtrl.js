@@ -9,13 +9,12 @@ function CategoryCtrl ($stateParams, $firebaseArray, $state, $scope, sets) {
   var user = $scope.$parent.user;
   var _userSetsRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/');
 
-  $scope.Math=Math;
-
   vm.setSlug = $stateParams.setSlug;
   vm.setId = $stateParams.setId;
   vm.userSets = $firebaseArray(_userSetsRef);
   vm.countCards = countCards;
   vm.getPercent = getPercent;
+  $scope.Math=Math;
 
   function countCards(cardsObj) {
     return Object.keys(cardsObj).length;
@@ -26,7 +25,6 @@ function CategoryCtrl ($stateParams, $firebaseArray, $state, $scope, sets) {
   }
 
   vm.slickConfig = {
-    centerMode: true,
     infinite: true,
     focusOnSelect: true,
     responsive: [
