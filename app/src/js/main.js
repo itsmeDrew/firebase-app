@@ -24,6 +24,7 @@ require('./directives/confirmClick');
 require('./directives/nav/nav-main');
 require('./directives/nav/profile');
 require('./directives/nav/hamburger');
+require('./directives/set-card');
 require('./directives/user/profile-pic');
 
 //SERVICES
@@ -44,6 +45,7 @@ var app = angular.module('App', [
   'App.Directive.Logo',
   'App.Directive.RouteClassnames',
   'App.Directive.ngConfirmClick',
+  'App.Directive.SetCard',
   'App.Directive.Nav.Profile',
   'App.Directive.Nav.Hamburger',
   'App.Directive.Nav.Main',
