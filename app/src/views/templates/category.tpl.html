@@ -6,6 +6,12 @@
         <div class="set-card__header" ng-init="cat.getSet(set.slug)">
           <strong>{{ set.name }}</strong>
             <div ng-repeat="userCard in cat.userSets" ng-if="userCard.$id === set.slug">
+              <div class="bar">
+                <div
+                class="bar-progress"
+                style="width:{{ Math.round( cat.countCards(userCard.cards)) / set.numberofcards * 100 }}%"
+                ></div>
+              </div>
               <small>{{ cat.countCards(userCard.cards) }} / {{ set.numberofcards }}</small>
             </div>
         </div>
