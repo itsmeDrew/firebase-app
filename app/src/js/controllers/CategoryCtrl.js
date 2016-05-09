@@ -12,14 +12,11 @@ function CategoryCtrl ($stateParams, $firebaseArray, $state, $scope, sets) {
   vm.setSlug = $stateParams.setSlug;
   vm.setId = $stateParams.setId;
   vm.userSets = $firebaseArray(_userSetsRef);
-
   vm.countCards = countCards;
 
   function countCards(cardsObj) {
     return Object.keys(cardsObj).length;
   }
-
-  console.log(vm.userSets);
 
   vm.slickConfig = {
     centerMode: true,
