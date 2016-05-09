@@ -26,7 +26,6 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, $firebaseObject
       });
     }
   });
-
 };
 
 module.exports = SetsCtrl;
