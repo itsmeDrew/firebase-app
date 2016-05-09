@@ -3,8 +3,11 @@
   <slick infinite=true slides-to-show=4 slides-to-scroll=4 settings="cat.slickConfig" arrows=false>
     <div class="set-card" ng-repeat="set in sets">
       <div class="set-card__content">
-        <div class="set-card__header">
+        <div class="set-card__header" ng-init="cat.getSet(set.slug)">
           <strong>{{ set.name }}</strong>
+            <div ng-repeat="userCard in cat.userSets" ng-if="userCard.$id === set.slug">
+              <small>{{ cat.countCards(userCard.cards) }} / {{ set.numberofcards }}</small>
+            </div>
         </div>
         <a class="set-card__btn btn-solid--primary" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">go to set</a>
       </div>
