@@ -3,12 +3,7 @@
     <div class="set-card__header">
       <strong>{{ set.name }}</strong>
         <div ng-repeat="userSet in setCard.userSets" ng-if="userSet.$id === set.slug">
-          <div class="bar">
-            <div
-            class="bar-progress"
-            style="width:{{ Math.round( setCard.countCards(userSet.cards)) / set.numberofcards * 100 }}%"
-            ></div>
-          </div>
+          <div class="radial-progress progress-{{ Math.round(setCard.countCards(userSet.cards) / set.numberofcards * 100) }}"></div>
           <small>{{ setCard.countCards(userSet.cards) }} / {{ set.numberofcards }}</small>
         </div>
     </div>
