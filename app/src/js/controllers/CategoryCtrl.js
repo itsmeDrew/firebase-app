@@ -22,7 +22,6 @@ function CategoryCtrl ($stateParams, $firebaseArray, $state, $scope, sets) {
   }
 
   function getPercent(valOne, valTwo) {
-    console.log(valOne / valTwo);
     return Math.round(valOne / valTwo);
   }
 
