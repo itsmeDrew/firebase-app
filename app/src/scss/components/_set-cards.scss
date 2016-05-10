@@ -25,6 +25,8 @@
 
 .set-card__content {
   text-align: center;
+  height: 100%;
+  position: relative;
 }
 
 .set-card__header {
@@ -45,5 +47,9 @@
 }
 
 .set-card__btn {
+  @include centerVertical();
+
   display: inline-block;
+  position: absolute;
+  bottom: 0;
 }
