@@ -8,6 +8,7 @@
 
   margin: 1vw;
   padding: 1rem;
+  height: 290px;
 
   @include breakpointLargerThan($breakpoint--medium) {
     @include scale(0.9);
@@ -29,6 +30,18 @@
 .set-card__header {
   display: block;
   padding: 1rem 0;
+}
+
+.set-card__progress {
+  position: relative;
+}
+
+.set-card__count {
+  @include centerAll();
+  @include font-size(2vw, 20px);
+
+  color: $grey--light;
+  position: absolute;
 }
 
 .set-card__btn {
