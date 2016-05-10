@@ -1,0 +1,20 @@
+.bar {
+  @include borderRadius(99px);
+
+  background: darken($white, 5%);
+  height: 10px;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.bar-progress {
+  @include borderRadius(99px);
+
+  background: $green;
+  height: 100%;
+  width: 0;
+  position: absolute;
+  z-index: 10;
+  transition: width $base-animation__speed;
+}

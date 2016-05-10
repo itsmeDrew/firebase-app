@@ -51,8 +51,8 @@ p {
 a {
   color: $blue;
   text-decoration: none;
-}
 
-a:hover {
-  color: lighten($blue, 10%);
+  &:hover {
+    color: lighten($blue, 10%);
+  }
 }

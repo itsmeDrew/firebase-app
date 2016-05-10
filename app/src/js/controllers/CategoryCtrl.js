@@ -4,13 +4,10 @@ var app = angular.module('App.Controller.Category', []);
 
 app.controller('CategoryCtrl', CategoryCtrl);
 
-function CategoryCtrl ($stateParams, $state, $scope) {
+function CategoryCtrl ($stateParams, $firebaseArray, $state, $scope, sets) {
   var vm = this;
-  vm.setSlug = $stateParams.setSlug;
-  vm.setId = $stateParams.setId;
 
   vm.slickConfig = {
-    centerMode: true,
     infinite: true,
     focusOnSelect: true,
     responsive: [

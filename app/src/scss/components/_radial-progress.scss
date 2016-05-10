@@ -1,0 +1,52 @@
+$bar__bg-color: darken($white, 5%);
+$bar__clip-color: $white;
+$progress-bar__bg-color--low: $red;
+$progress-bar__bg-color--high: $yellow;
+$progress-bar__bg-color--success: $green;
+$progress-bar__size: 24px;
+$radial-progress__size: 114px;
+
+.radial-progress {
+  @include borderRadius(50%);
+
+	position: relative;
+	width: $radial-progress__size;
+	height: $radial-progress__size;
+	border: 1px solid $bar__clip-color;
+	background-color: $bar__clip-color;
+  margin: 1rem auto;
+
+  &:after {
+    @include centerAll();
+    @include borderRadius(50%);
+
+    content: "";
+    display: block;
+  	width: $radial-progress__size - $progress-bar__size;
+  	height: $radial-progress__size - $progress-bar__size;
+  	background: $bar__clip-color;
+  	position: absolute;
+  }
+}
+
+$step: 1;
+$loops: 100;
+$increment: (360 / $loops);
+$half: round($loops / 2);
+@for $i from 0 through $loops {
+  .progress-#{$i*$step} {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    @if $i < 50 {
+  		$nextdeg: 90deg + ( $increment * $i );
+  		background-image: linear-gradient(90deg, $bar__bg-color 50%, transparent 50%, transparent), linear-gradient($nextdeg, $progress-bar__bg-color--low 50%, $bar__bg-color 50%, $bar__bg-color);
+    } @else if $i == 100 {
+      $nextdeg: -90deg + ( $increment * ( $i - $half ) );
+  		background-image: linear-gradient($nextdeg, $progress-bar__bg-color--success 50%, transparent 50%, transparent), linear-gradient(270deg, $progress-bar__bg-color--success 50%, $bar__bg-color 50%, $bar__bg-color);
+    } @else {
+  		$nextdeg: -90deg + ( $increment * ( $i - $half ) );
+  		background-image: linear-gradient($nextdeg, $progress-bar__bg-color--high 50%, transparent 50%, transparent), linear-gradient(270deg, $progress-bar__bg-color--high 50%, $bar__bg-color 50%, $bar__bg-color);
+    }
+  }
+}

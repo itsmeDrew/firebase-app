@@ -1,0 +1,12 @@
+<div class="set-card">
+  <div class="set-card__content">
+    <div class="set-card__header">
+      <strong>{{ set.name }}</strong>
+        <div class="set-card__progress" ng-repeat="userSet in setCard.userSets" ng-if="userSet.$id === set.slug">
+          <radial-progress progress="Math.round(setCard.countCards(userSet.cards) / set.numberofcards * 100)"></radial-progress>
+          <small class="set-card__count">{{ setCard.countCards(userSet.cards) }} / {{ set.numberofcards }}</small>
+        </div>
+    </div>
+    <button class="set-card__btn btn-solid--primary" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">go to set</button>
+  </div>
+</div>
