@@ -14,7 +14,7 @@ $radial-progress__size: 114px;
 	height: $radial-progress__size;
 	border: 1px solid $bar__clip-color;
 	background-color: $bar__clip-color;
-  margin: 1rem auto;
+  margin: 0 auto;
 
   &:after {
     @include centerAll();
