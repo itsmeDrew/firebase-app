@@ -1,7 +1,7 @@
 h1 {
   @include font-size(50px);
 
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-extrabold', arial, sans-serif;
   letter-spacing: .15rem;
   color: $white;
   text-transform: uppercase;
@@ -10,7 +10,7 @@ h1 {
 h2 {
   @include font-size(48px);
 
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-bold', arial, sans-serif;
   font-weight: bold;
   color: $tundora;
   line-height: 1.5;
@@ -19,7 +19,7 @@ h2 {
 h3 {
   @include font-size($base-font__size);
 
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-regular', arial, sans-serif;
   color: $red;
   line-height: 1.5;
 }
@@ -27,14 +27,14 @@ h3 {
 h4 {
   @include font-size($base-font__size);
 
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-regular', arial, sans-serif;
   color: $red;
   line-height: 1.5;
 }
 
 h5 {
   @include font-size($base-font__size - 2);
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-regular', arial, sans-serif;
   color: $tundora;
   line-height: 1.5;
 }
@@ -42,7 +42,7 @@ h5 {
 p {
   @include font-size($base-font__size);
 
-  font-family: $base-font__family--sans-serif;
+  font-family: $base-font__family--sans-serif + '-regular', arial, sans-serif;
   color: $black;
   line-height: 1.5;
   margin-bottom: .625rem;
