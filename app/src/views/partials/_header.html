@@ -1,5 +1,7 @@
 <header class="header" ng-class="{'menu-active': header.menuOpen}">
-  <logo class="header__logo"></logo>
+  <a ui-sref="app">
+    <logo class="header__logo"></logo>
+  </a>
   <div class="nav" ui-view="nav"></div>
   <nav-profile class="header__profile-menu"
     ng-if="user" ng-click="header.toggleProfile" ng-class="{'profile-is-open': header.profileOpen}">
