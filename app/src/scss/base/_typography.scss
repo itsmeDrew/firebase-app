@@ -49,10 +49,18 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $base-color--primary;
   text-decoration: none;
 
   &:hover {
-    color: lighten($blue, 10%);
+    color: lighten($base-color--primary, 10%);
+  }
+
+  &:active {
+    color: lighten($base-color--primary, 10%);
+  }
+
+  &:focus {
+    color: $base-color--primary;
   }
 }

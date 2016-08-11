@@ -1,32 +1,27 @@
-.site-nav__nav {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 20;
-  text-align: right;
-  visibility: hidden;
-  opacity: 0;
-  transition: all $base-animation__speed;
-  z-index: 200;
+.nav {
+  @include breakpointLargerThan($breakpoint--medium) {
+    display: inline-block;
+  }
+}
 
+.site-nav__nav {
   @include breakpointSmallerThan($breakpoint--medium) {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+    text-align: right;
+    visibility: hidden;
+    opacity: 0;
+    transition: all $base-animation__speed;
+    z-index: 200;
     height: 0;
     left: 0;
     overflow-y: scroll;
   }
 
   @include breakpointLargerThan($breakpoint--medium) {
-    @include borderRadius($base-border__radius);
-    @include boxShadow(0 0 7px rgba(0,0,0,0.5));
-
-    background: $nav-desktop__background;
-
-    &:before {
-      @include arrowUp(10px, $nav-desktop__background);
-
-      right: 24px;
-      top: -10px;
-    }
+    display: inline-block;
   }
 }
 
@@ -37,11 +32,15 @@
 }
 
 .site-nav__link {
-  @include font-size(20px);
+  @include font-size(16px);
 
+  font-family: $base-font__family--sans-serif + '-bold', arial, sans-serif;
   text-transform: capitalize;
   padding: 1rem 0;
   display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $white;
 
   @include breakpointSmallerThan($breakpoint--small) {
     @include font-size(10vw, 30px);
@@ -58,10 +57,19 @@
     &:hover {
       color: $nav-bars__color--hover;
     }
+
+    &:focus {
+      color: $white;
+    }
+
+    &:focus {
+      color: $white;
+    }
   }
 
   @include breakpointLargerThan($breakpoint--medium) {
-    color: $black;
+    color: $white;
+    display: inline-block;
     padding: 1rem 2rem;
     text-align: left;
 

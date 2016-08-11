@@ -15,7 +15,7 @@ $base-font__family--serif: 'Arvo', 'Times New Roman', serif;
 $base-font__family--sans-serif: 'Proxima';
 $base-font__size: 16px;
 $base-line-height: 1.5;
-$base-color--primary: $blue;
+$base-color--primary: $ca-red;
 $base-color--secondary: $orange;
 $base-color--triad: $yellow;
 
@@ -64,7 +64,7 @@ $base-animation__speed: 200ms;
 $nav-mobile__background: $black;
 $nav-desktop__background: $base-color--triad;
 $nav-bars__color: $white;
-$nav-bars__color--hover: $nav-desktop__background;
+$nav-bars__color--hover: $yellow;
 $nav-bars__height: 3px;
 $nav-bars__width: 20px;
 $nav-bars__border-radius: 1px;
