@@ -8,12 +8,9 @@ body {
 
   line-height: $base-line-height;
   font-family: $base-font__family--sans-serif + '-regular', arial, sans-serif;
+  background: $ca-dark-blue;
 }
 
 hgroup {
   margin-bottom: 2rem;
-}
-
-.sets {
-  background-color: $black;
 }

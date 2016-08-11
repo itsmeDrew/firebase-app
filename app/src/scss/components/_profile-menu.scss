@@ -35,10 +35,11 @@
 .profile-menu__dropdown-menu {
   @include boxShadow(0 0 10px rgba(0,0,0,0.7));
   @include transition(all $base-animation__speed);
-  @include centerVertical();
+
 
   position: absolute;
   top: 60px;
+  right: 0;
   height: 0;
   width: 180px;
   background: $white;
@@ -65,8 +66,8 @@
 
     &:before {
       @include arrowUp(10px, $white);
-      @include centerVertical();
 
+      right: 10px;
       top: -10px;
     }
   }
