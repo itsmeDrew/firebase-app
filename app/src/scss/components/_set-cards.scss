@@ -34,13 +34,7 @@
   position: relative;
 }
 
-.set-card__count {
-  @include centerAll();
-  @include font-size(2vw, 20px);
 
-  color: $grey--light;
-  position: absolute;
-}
 
 .set-card__btn {
   @include centerVertical();

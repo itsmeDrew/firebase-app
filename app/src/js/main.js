@@ -22,6 +22,7 @@ require('./directives/logo');
 require('./directives/routeClassnames');
 require('./directives/confirmClick');
 require('./directives/radial-progress');
+require('./directives/progress-bar');
 require('./directives/nav/nav-main');
 require('./directives/nav/profile');
 require('./directives/nav/hamburger');
@@ -48,6 +49,7 @@ var app = angular.module('App', [
   'App.Directive.ngConfirmClick',
   'App.Directive.SetCard',
   'App.Directive.Progress.Radial',
+  'App.Directive.Progress.Bar',
   'App.Directive.Nav.Profile',
   'App.Directive.Nav.Hamburger',
   'App.Directive.Nav.Main',
