@@ -72,14 +72,15 @@ function SetsCtrl ($firebaseObject, config) {
   }
 
   function addCardToUser(set, user, newCard, userCard) {
+    console.log(user);
     if (userCard) {
-      var _userCardRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + set.slug + '/cards/' + userCard.id);
+      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + userCard.id);
 
       _userCardRef.update({
         qty: userCard.qty + 1
       });
     } else {
-      var _userSetsRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + set.slug + '/cards/');
+      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/');
       var _newCardRef = _userSetsRef.push();
 
       _newCardRef.set({
@@ -94,7 +95,7 @@ function SetsCtrl ($firebaseObject, config) {
 
   function removeUserCard(set, user, userCard) {
     var _userCard = userCard;
-    var _userCardRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + set.slug + '/cards/' + _userCard.id);
+    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + _userCard.id);
 
     _userCardRef.update({
       qty: _userCard.qty - 1
@@ -106,7 +107,7 @@ function SetsCtrl ($firebaseObject, config) {
   }
 
   function updateQty(e, set, user, card, newQty, callback) {
-    var _userCardRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + set.slug + '/cards/' + card.id);
+    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + card.id);
     vm.updated = false;
 
     if (e.keyCode == 13) {

@@ -12,11 +12,24 @@ function UsersCtrl ($firebaseAuth, config) {
 
   vm.authHandler = authHandler;
   vm.checkAuth = checkAuth;
-  vm.login = loginWithFacebook;
+  vm.loginWithFacebook = loginWithFacebook;
+  vm.loginWithGoogle = loginWithGoogle;
   vm.logout = logout;
 
   function loginWithFacebook(callback) {
     baseAuth.$authWithOAuthPopup("facebook").then(function(authData) {
+      if (authData) {
+        authHandler(baseRef);
+        callback();
+        console.log("Authenticated with:", authData);
+      }
+    }).catch(function(error) {
+      console.log("Authentication failed:", error);
+    });
+  }
+
+  function loginWithGoogle(callback) {
+    baseAuth.$authWithOAuthPopup("google").then(function(authData) {
       if (authData) {
         authHandler(baseRef);
         callback();
@@ -82,6 +95,8 @@ function UsersCtrl ($firebaseAuth, config) {
       return authData.twitter.displayName;
       case 'facebook':
       return authData.facebook.displayName;
+      case 'google':
+      return authData.google.displayName;
     }
   }
 

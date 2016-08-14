@@ -9,7 +9,8 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
   var setsRef = new Firebase(config.baseDataURL);
 
 
-  vm.login = login;
+  vm.loginWithFacebook = loginWithFacebook;
+  vm.loginWithGoogle = loginWithGoogle;
   vm.logout = logout;
   $scope.user = '';
 
@@ -27,8 +28,12 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
     reloadState();
   });
 
-  function login() {
-    users.login(reloadState);
+  function loginWithFacebook() {
+    users.loginWithFacebook(reloadState);
+  }
+
+  function loginWithGoogle() {
+    users.loginWithGoogle(reloadState);
   }
 
   function logout() {
@@ -45,13 +50,19 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
     var authData = users.checkAuth();
 
     if (authData) {
-      $scope.user = authData.facebook;
+      if (authData.provider === 'facebook') {
+        $scope.user = authData.facebook;
+      } else if (authData.provider === 'google') {
+        $scope.user = authData.google;
+      }
 
-      var user = $scope.user;
-      var userRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/role');
+      $scope.user.uid = authData.uid;
+
+      var _user = $scope.user;
+      var userRef = new Firebase(usersDataURL + '/' + _user.uid + '/role');
 
       userRef.once("value", function(snapshot) {
-        $scope.user.role = snapshot.val();
+        _user.role = snapshot.val();
       })
     }
   }

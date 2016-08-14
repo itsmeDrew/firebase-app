@@ -12,7 +12,7 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, $firebaseObject
 
   sets.getSetBySlug($stateParams.setSlug, function(setData) {
     var _currentSet = setData;
-    var _userSetsRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/' + _currentSet.slug + '/cards/' );
+    var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + _currentSet.slug + '/cards/' );
 
     vm.currentSet = _currentSet;
     vm.setsService = sets;
