@@ -16,5 +16,11 @@
 }
 
 .bar-progress__count {
-  
+  @include font-size(16px);
+  @include centerAll();
+
+  opacity: 0.3;
+  font-family: 'Proxima-Bold';
+  position: absolute;
+  z-index: 20;
 }
