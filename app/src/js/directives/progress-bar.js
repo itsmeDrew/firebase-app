@@ -11,7 +11,7 @@ function progressBar($rootScope) {
       currentCount: '=currentCount',
       totalCount: '=totalCount'
     },
-    template: '<div class="bar"><div class="bar-progress" style="width:{{ currentCount / totalCount * 100 }}%"></div></div>',
+    templateUrl: 'partials/_progress-bar.html',
     link: function (scope, element, attr) {
       var vm = this;
 
