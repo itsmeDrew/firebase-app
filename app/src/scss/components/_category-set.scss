@@ -16,6 +16,7 @@
   &:after {
     @include overlay($red, 0.9);
     @include transition($base-animation__speed opacity ease-in);
+    
     z-index: 10;
   }
 
