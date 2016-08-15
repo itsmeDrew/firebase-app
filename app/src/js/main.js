@@ -47,7 +47,7 @@ var app = angular.module('App', [
   'App.Directive.Logo',
   'App.Directive.RouteClassnames',
   'App.Directive.ngConfirmClick',
-  'App.Directive.categorySet',
+  'App.Directive.CategorySet',
   'App.Directive.Progress.Radial',
   'App.Directive.Progress.Bar',
   'App.Directive.Nav.Profile',

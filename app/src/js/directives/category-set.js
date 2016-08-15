@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('App.Directive.categorySet', []);
+var app = angular.module('App.Directive.CategorySet', []);
 
 app.directive('categorySet', categorySet);
 
