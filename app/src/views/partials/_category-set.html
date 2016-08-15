@@ -1,15 +1,12 @@
-<div class="category-set" ng-class="set.slug" style="background-image: url('assets/img/{{set.slug}}.jpg');">
-  <div class="category-set__content">
-    <div class="category-set__header">
-      <span class="category-set__title">{{ set.name }}</span>
-    </div>
-  </div>
-  <div class="category-set__progress" ng-repeat="userSet in categorySet.userSets" ng-if="userSet.$id === set.slug">
-    <progress-bar current-count="categorySet.countCards(userSet.cards)" total-count="set.numberofcards"></progress-bar>
-  </div>
-  <div class="category-set__overlay">
+<a class="category-set__link" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">
+  <div class="category-set" ng-class="set.slug" style="background-image: url('assets/img/{{set.slug}}.jpg');">
     <div class="category-set__content">
-      <a class="category-set__link" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">go to set</a>
+      <div class="category-set__header">
+        <span class="category-set__title">{{ set.name }}</span>
+      </div>
+    </div>
+    <div class="category-set__progress" ng-repeat="userSet in categorySet.userSets" ng-if="userSet.$id === set.slug">
+      <progress-bar current-count="categorySet.countCards(userSet.cards)" total-count="set.numberofcards"></progress-bar>
     </div>
   </div>
-</div>
+</a>

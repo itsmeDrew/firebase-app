@@ -15,13 +15,13 @@
 
   &:after {
     @include overlay($red, 0.9);
-
+    @include transition($base-animation__speed opacity ease-in);
     z-index: 10;
   }
 
   &:hover {
-    .category-set__overlay {
-      display: block;
+    &:after {
+      opacity: 0.4;
     }
   }
 }
@@ -53,17 +53,4 @@
   left: 0;
   width: 100%;
   z-index: 20;
-}
-
-.category-set__overlay {
-  @include overlay($black, 0.8);
-
-  display: none;
-  z-index: 20;
-}
-
-.category-set__link {
-  position: absolute;;
-  color: $white;
-  text-transform: uppercase;
 }
