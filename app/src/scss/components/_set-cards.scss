@@ -1,15 +1,29 @@
-.set-cards {
+.category-sets {
   padding: 2rem 0;
 }
 
-.set-card {
+.category-set {
   @include boxShadow(0 0 10px rgba(0,0,0,0.3));
   @include transition($base-animation__speed all);
 
   background: $white;
   margin: 1vw;
   padding: 1rem;
-  height: 370px;
+  height: 160px;
+  background-size: cover;
+  position: relative;
+
+  &:after {
+    @include overlay($red, 0.9);
+
+    z-index: 10;
+  }
+
+  &:hover {
+    .category-set__overlay {
+      display: block;
+    }
+  }
 
   @include breakpointLargerThan($breakpoint--medium) {
     @include scale(0.9);
@@ -24,19 +38,25 @@
   }
 }
 
-.set-card__content {
+.category-set__content {
   text-align: center;
   height: 100%;
   position: relative;
+  z-index: 20;
 }
 
-.set-card__progress {
+.category-set__progress {
   position: relative;
 }
 
+.category-set__overlay {
+  @include overlay($black, 0.8);
 
+  display: none;
+  z-index: 20;
+}
 
-.set-card__btn {
+.category-set__btn {
   @include centerVertical();
 
   display: inline-block;

@@ -1,13 +1,13 @@
 'use strict';
 
-var app = angular.module('App.Directive.SetCard', []);
+var app = angular.module('App.Directive.categorySet', []);
 
-app.directive('setCard', setCard);
+app.directive('categorySet', categorySet);
 
-function setCard($stateParams, $firebaseArray) {
+function categorySet($stateParams, $firebaseArray) {
   return {
     restrict: 'E',
-    templateUrl: 'partials/_set-card.html',
+    templateUrl: 'partials/_category-set.html',
     controller: function($scope, $stateParams, $state) {
       var vm = this;
       var user = $scope.$parent.user;
@@ -26,8 +26,8 @@ function setCard($stateParams, $firebaseArray) {
         return Math.round(valOne / valTwo);
       }
     },
-    controllerAs: 'setCard'
+    controllerAs: 'categorySet'
   };
 }
 
-module.exports = setCard;
+module.exports = categorySet;

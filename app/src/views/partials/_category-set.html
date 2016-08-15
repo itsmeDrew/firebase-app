@@ -1,0 +1,13 @@
+<div class="category-set" ng-class="set.slug" style="background-image: url('assets/img/{{set.slug}}.jpg');">
+  <div class="category-set__content">
+    <div class="category-set__progress" ng-repeat="userSet in categorySet.userSets" ng-if="userSet.$id === set.slug">
+      <div class="bar">
+        <progress-bar current-count="categorySet.countCards(userSet.cards)" total-count="set.numberofcards"></progress-bar>
+      </div>
+      <small class="category-set__count">{{ categorySet.countCards(userSet.cards) }} / {{ set.numberofcards }}</small>
+    </div>
+  </div>
+  <div class="category-set__overlay">
+    <button class="category-set__btn btn-solid--primary" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">go to set</button>
+  </div>
+</div>

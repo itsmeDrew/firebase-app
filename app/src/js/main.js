@@ -26,7 +26,7 @@ require('./directives/progress-bar');
 require('./directives/nav/nav-main');
 require('./directives/nav/profile');
 require('./directives/nav/hamburger');
-require('./directives/set-card');
+require('./directives/category-set');
 require('./directives/user/profile-pic');
 
 //SERVICES
@@ -47,7 +47,7 @@ var app = angular.module('App', [
   'App.Directive.Logo',
   'App.Directive.RouteClassnames',
   'App.Directive.ngConfirmClick',
-  'App.Directive.SetCard',
+  'App.Directive.categorySet',
   'App.Directive.Progress.Radial',
   'App.Directive.Progress.Bar',
   'App.Directive.Nav.Profile',
