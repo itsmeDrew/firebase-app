@@ -9,6 +9,7 @@ function UsersCtrl ($firebaseAuth, config) {
   var baseDataURL = config.baseDataURL;
   var baseRef = new Firebase(baseDataURL);
   var baseAuth = $firebaseAuth(baseRef);
+  var adminRef = baseRef.child("admins");
 
   vm.authHandler = authHandler;
   vm.checkAuth = checkAuth;
@@ -21,7 +22,6 @@ function UsersCtrl ($firebaseAuth, config) {
       if (authData) {
         authHandler(baseRef);
         callback();
-        console.log("Authenticated with:", authData);
       }
     }).catch(function(error) {
       console.log("Authentication failed:", error);
@@ -33,7 +33,6 @@ function UsersCtrl ($firebaseAuth, config) {
       if (authData) {
         authHandler(baseRef);
         callback();
-        console.log("Authenticated with:", authData);
       }
     }).catch(function(error) {
       console.log("Authentication failed:", error);
@@ -51,33 +50,30 @@ function UsersCtrl ($firebaseAuth, config) {
 
         _userList.once('value', function(snapshot) {
           var _userId = authData.uid;
+          var _userExists = snapshot.hasChild(_userId);
+          var _authenticated = vm.authenticated;
 
-          if (authData && !snapshot.hasChild(_userId) && !vm.authenticated) {
-            // NEW USER
+          if (!_userExists && authData && !_authenticated) {
             setNewUser(_userList, _userId, authData);
-            vm.authenticated = true;
-          } else if (authData && snapshot.hasChild(_userId) && !vm.authenticated) {
-            // RETURNING USER
-            vm.authenticated = true;
           }
+
+          vm.authenticated = true;
         });
       }
     });
   }
 
-  function setNewUser(list, userId, authData) {
-    var _adminList = baseRef.child("admins");
-
-    _adminList.once('value', function(snapshot) {
+  function setNewUser(userListRef , userId, authData) {
+    adminRef.once('value', function(snapshot) {
       if (snapshot.hasChild(authData.uid)) {
-        list.child(userId).set({
+        userListRef .child(userId).set({
           provider: authData.provider,
           name: getName(authData),
           userID: userId,
           role: 99
         });
       } else {
-        list.child(userId).set({
+        userListRef .child(userId).set({
           provider: authData.provider,
           name: getName(authData),
           userID: userId,
