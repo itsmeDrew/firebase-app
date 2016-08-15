@@ -1,10 +1,8 @@
-<section class="set-cards" ng-if="sets">
+<section class="set-cards container" ng-if="sets">
   <h2>Choose a set</h2>
-  <slick infinite=true slides-to-show=4 slides-to-scroll=4 settings="cat.slickConfig" arrows=false>
-    <category-set ng-repeat="set in sets">
-      <!-- partials/_category-set.html -->
-    </category-set>
-  </slick>
+  <category-set class="col--md-4" ng-repeat="set in sets">
+    <!-- partials/_category-set.html -->
+  </category-set>
 </section>
 
 <!-- USER LOGGED IN -->
