@@ -8,8 +8,8 @@
 
   background: $white;
   margin: 1vw;
-  padding: 1rem;
   height: 160px;
+  padding: 1rem;
   background-size: cover;
   position: relative;
 
@@ -24,18 +24,6 @@
       display: block;
     }
   }
-
-  @include breakpointLargerThan($breakpoint--medium) {
-    @include scale(0.9);
-
-    opacity: 0.9;
-
-    &:hover {
-      @include scale(1);
-
-      opacity: 1;
-    }
-  }
 }
 
 .category-set__content {
@@ -45,8 +33,26 @@
   z-index: 20;
 }
 
+.category-set__header {
+  text-align: left;
+}
+
+.category-set__title {
+  @include font-size(20px);
+
+  font-family: 'Titillium Web';
+  font-weight: 800;
+  color: $white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 .category-set__progress {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
 }
 
 .category-set__overlay {
@@ -56,11 +62,8 @@
   z-index: 20;
 }
 
-.category-set__btn {
-  @include centerVertical();
-
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+.category-set__link {
+  position: absolute;;
+  color: $white;
+  text-transform: uppercase;
 }
