@@ -11,7 +11,7 @@ function setCard($stateParams, $firebaseArray) {
     controller: function($scope, $stateParams, $state) {
       var vm = this;
       var user = $scope.$parent.user;
-      var _userSetsRef = new Firebase(usersDataURL + '/facebook:' + user.id + '/sets/');
+      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/');
 
       vm.userSets = $firebaseArray(_userSetsRef);
       vm.countCards = countCards;
