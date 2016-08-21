@@ -2,56 +2,102 @@
   padding: 2rem 0;
 }
 
-.category-set {
-  @include boxShadow(0 0 10px rgba(0,0,0,0.3));
+.category__set {
   @include transition($base-animation__speed all);
+  @include scale(0.98);
 
   background: $white;
   margin: 1vw;
-  height: 160px;
-  padding: 1rem;
   background-size: cover;
+  border: 1px solid darken($white, 10%);
   position: relative;
 
-  &:after {
-    @include overlay($red, 0.9);
-    @include transition($base-animation__speed opacity ease-in);
-    
-    z-index: 10;
+  @include breakpointLargerThan($breakpoint--large) {
+    height: 300px;
   }
 
   &:hover {
+    @include boxShadow(0 0 18px rgba(0,0,0,0.1));
+    @include scale(1);
+
+    top: 0;
+    left: 0;
+
+    .category__overlay {
+      @include centerAll();
+
+      display: block;
+      position: absolute;
+      top: 40%;
+      z-index: 300;
+    }
+
     &:after {
-      opacity: 0.4;
+      @include overlay($red, 0.9);
+
+      z-index: 100;
     }
   }
 }
 
-.category-set__content {
-  text-align: center;
-  height: 100%;
-  position: relative;
-  z-index: 20;
+.category__content {
+  padding: 1rem 2rem;
 }
 
-.category-set__header {
-  text-align: left;
-}
+.category__status {
+  @include font-size(11px);
+  @include cf();
 
-.category-set__title {
-  @include font-size(20px);
-
-  font-family: 'Titillium Web';
-  font-weight: 800;
-  color: $white;
+  font-family: 'Proxima-Bold', arial;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  color: $grey--medium;
+  position: relative;
+  margin-bottom: 1rem;
 }
 
-.category-set__progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.category__favorites {
+  float: left;
+}
+
+.category__message {
+  float: right;
+}
+
+.category__logo {
+  width: 100%;
+}
+
+.category__progress {
+  position: relative;
   width: 100%;
   z-index: 20;
+}
+
+.category__details {
+  background: $grey--light;
+  border-top: 1px solid darken($white, 10%);
+  border-position: outside;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+  z-index: 200;
+}
+
+.category__title {
+  color: $black;
+  text-transform: capitalize;
+  font-family: 'Proxima-Semibold', arial;
+  display: block;
+}
+
+.category__release-date {
+  @include font-size(12px);
+
+  color: $grey;
+  display: block;
+}
+
+.category__overlay {
+  display: none;
 }

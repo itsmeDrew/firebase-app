@@ -15,7 +15,7 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
   $scope.user = '';
 
   sets.getSets().$bindTo($scope, 'sets');
-
+  console.log($scope);
   setsRef.onAuth(function(authData) {
     setUser();
   });

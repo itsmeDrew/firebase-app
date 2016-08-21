@@ -6,6 +6,10 @@
 @import 'core/mixins';
 @import 'core/animations';
 
+// core overrides
+@import 'core/colors';
+@import 'core/config';
+
 // vendor
 @import './node_modules/bedrock-css/src/scss/bedrock';
 @import './node_modules/slick-carousel/slick/slick.scss';
@@ -13,9 +17,7 @@ $slick-font-path: "../fonts/slick/";
 $slick-loader-path: "../img/";
 @import './node_modules/slick-carousel/slick/slick-theme.scss';
 
-// core overrides
-@import 'core/colors';
-@import 'core/config';
+
 
 // base
 @import 'base/reset';
