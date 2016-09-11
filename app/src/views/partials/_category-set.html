@@ -9,7 +9,9 @@
       <progress-bar current-count="categorySet.countCards(userSet.cards)" total-count="set.numberofcards"></progress-bar>
     </div>
     <div class="category__overlay">
-      <a href="#" class="btn-solid--primary category__btn">click here</a>
+      <a class="btn-solid--primary category__btn" ui-sref="app.set({ setSlug: set.slug, setId: set.id })">
+        go to set
+      </a>
     </div>
   </div>
   <div class="category__details">
@@ -17,4 +19,3 @@
     <span class="category__release-date">Released {{ set.releasedate }}</span>
   </div>
 </div>
-<!-- <a class="category-set__link" ui-sref="app.set({ setSlug: set.slug, setId: set.id })"> -->

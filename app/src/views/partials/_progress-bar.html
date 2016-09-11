@@ -1,4 +1,14 @@
 <div class="bar">
-  <div class="bar-progress" style="width:{{ currentCount / totalCount * 100 }}%"></div>
+  <div
+      class="bar-progress"
+      ng-class="
+        {
+          'green': currentCount >= totalCount * .75,
+          'yellow': currentCount < totalCount * .75 && currentCount > totalCount * .5,
+          'red': currentCount < totalCount * .5
+        }
+      "
+      style="width:{{ currentCount / totalCount * 100 }}%">
+  </div>
 </div>
 <small class="bar-progress__count">{{ currentCount }}/{{ totalCount }}</small>

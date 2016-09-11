@@ -13,6 +13,16 @@
   position: absolute;
   z-index: 10;
   transition: width $base-animation__speed;
+
+  &.yellow {
+    background: $yellow;
+  }
+  &.green {
+    background: $green;
+  }
+  &.red {
+    background: $red;
+  }
 }
 
 .bar-progress__count {
