@@ -11,8 +11,12 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   vm.cardSubmitted = false;
   vm.addNewCard = addNewCard;
   vm.checkIfCardExists = checkIfCardExists;
-  vm.cardTypes = [{name: 'standard set', value: 'standard-set'}, {name: 'standard set foil', value: 'standard-set-foil'}, {name: 'parallel set', value: 'parallel-set'} ];
-  vm.submit = submit;
+  vm.cardTypes = [
+    {name: 'standard set', value: 'standard-set'},
+    {name: 'standard set foil', value: 'standard-set-foil'},
+    {name: 'parallel set', value: 'parallel-set'}
+  ];
+  vm.updateSetName = updateSetName;
   vm.addSet = addSet;
   vm.removeSet = removeSet;
 
@@ -26,10 +30,8 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   }
 
   function checkIfCardExists(cardnumber, set) {
-    var ref = new Firebase(setsDataURL + '/' + set.id + '/cards' );
-
-    ref.orderByChild("cardnumber").equalTo(cardnumber).on("value", function(snapshot) {
-      if(snapshot.val()) {
+    sets.checkIfCardExists(cardnumber, set, function(snapshot) {
+      if (snapshot.val()) {
         vm.cardExists = true;
       } else {
         vm.cardExists = false;
@@ -37,10 +39,8 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
     });
   }
 
-  function submit(newName, set) {
-    var ref = new Firebase(setsDataURL + '/' + set.id );
-
-    ref.update({ name: newName });
+  function updateSetName(set, newName) {
+    sets.updateSetName(set, newName);
   }
 
   function addSet(name, cards, date) {
@@ -49,9 +49,7 @@ function DashboardCtrl ($stateParams, $state, $scope, sets, config) {
   }
 
   function removeSet(set) {
-    var ref = new Firebase(setsDataURL + '/' + set.id );
-
-    ref.remove();
+    sets.removeSet(set);
   }
 
 };

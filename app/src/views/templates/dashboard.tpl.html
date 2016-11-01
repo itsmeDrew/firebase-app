@@ -43,7 +43,7 @@
         {{set.name}}
         <a ng-click="editName = ! editName">edit</a>
         <div class="edit" ng-show="editName">
-          <form ng-submit="dashboard.submit(name, set); editName = ! editName">
+          <form ng-submit="dashboard.updateSetName(set, name); editName = ! editName">
             <input ng-model="name" placeholder="new set name" type="text">
             <input type="submit" id="submit" value="Submit" />
           </form>
