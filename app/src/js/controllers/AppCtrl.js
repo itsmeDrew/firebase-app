@@ -13,8 +13,8 @@ function AppCtrl ($scope, $firebaseObject, $state, users, sets, config) {
   vm.loginWithGoogle = loginWithGoogle;
   vm.logout = logout;
   $scope.user = '';
-
-  sets.getSets().$bindTo($scope, 'sets');
+  $scope.sets = sets.getSets();
+  
   console.log($scope);
   setsRef.onAuth(function(authData) {
     setUser();

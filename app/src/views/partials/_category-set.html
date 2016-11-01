@@ -2,7 +2,7 @@
   <div class="category__content">
     <div class="category__status">
       <div class="category__favorites"><i class="fa fa-user"></i>1</div>
-      <div class="category__message">new</div>
+      <div class="category__message" ng-if="categorySet.recentSetAdded(set.dateadded)" ng-model="set.new">new</div>
     </div>
     <img class="category__logo" src="http://assets.pokemon.com/assets/cms2/img/trading-card-game/series/xy_series/xy02/xy02-logo-169-en.png" alt="flashfire">
     <div class="category__progress" ng-repeat="userSet in categorySet.userSets" ng-if="userSet.$id === set.slug" ng-model="banjo">

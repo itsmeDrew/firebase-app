@@ -4,7 +4,7 @@ var app = angular.module('App.Service.Sets', []);
 
 app.service('sets', SetsCtrl);
 
-function SetsCtrl ($firebaseObject, config) {
+function SetsCtrl ($firebaseArray, config) {
   var vm = this;
   var setsDataURL = config.setsDataURL;
   var usersDataURL = config.usersDataURL;
@@ -13,22 +13,39 @@ function SetsCtrl ($firebaseObject, config) {
   vm.updated = false;
   vm.addNewCard = addNewCard;
   vm.addNewSet = addNewSet;
+  vm.removeSet = removeSet;
+  vm.updateSetName = updateSetName;
   vm.getSets = getSets;
   vm.getSetBySlug = getSetBySlug;
+  vm.checkIfCardExists = checkIfCardExists;
   vm.addCardToUser = addCardToUser;
   vm.removeUserCard = removeUserCard;
   vm.updateQty = updateQty;
 
   function addNewSet(name, numberofcards, releaseDate) {
     var _newSetRef = setsRef.push();
+    var _todaysDate = Date();
 
     _newSetRef.set({
       name: name,
       id: _newSetRef.key(),
       numberofcards: numberofcards,
       slug: genSlug(name),
-      releasedate: releaseDate
+      releasedate: releaseDate,
+      dateadded: _todaysDate
     });
+  }
+
+  function removeSet(set) {
+    var _ref = new Firebase(setsRef + '/' + set.id );
+
+    _ref.remove();
+  }
+
+  function updateSetName(set, newName) {
+    var _ref = new Firebase(setsRef + '/' + set.id );
+
+    _ref.update({ name: newName });
   }
 
   function genSlug(data) {
@@ -40,9 +57,17 @@ function SetsCtrl ($firebaseObject, config) {
   }
 
   function getSets() {
-    var cardSets = $firebaseObject(setsRef);
+    var cardSets = $firebaseArray(setsRef);
 
     return cardSets;
+  }
+
+  function checkIfCardExists(cardnumber, set, callback) {
+    var _ref = new Firebase(setsRef + '/' + set.id + '/cards' );
+
+    _ref.orderByChild("cardnumber").equalTo(cardnumber).on("value", function(snapshot) {
+      callback(snapshot);
+    });
   }
 
   function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega, callback) {
