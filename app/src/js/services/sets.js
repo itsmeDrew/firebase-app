@@ -21,13 +21,15 @@ function SetsCtrl ($firebaseObject, config) {
 
   function addNewSet(name, numberofcards, releaseDate) {
     var _newSetRef = setsRef.push();
+    var _todaysDate = Date();
 
     _newSetRef.set({
       name: name,
       id: _newSetRef.key(),
       numberofcards: numberofcards,
       slug: genSlug(name),
-      releasedate: releaseDate
+      releasedate: releaseDate,
+      dateadded: _todaysDate
     });
   }
 
