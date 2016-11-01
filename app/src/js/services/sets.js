@@ -4,7 +4,7 @@ var app = angular.module('App.Service.Sets', []);
 
 app.service('sets', SetsCtrl);
 
-function SetsCtrl ($firebaseObject, config) {
+function SetsCtrl ($firebaseArray, config) {
   var vm = this;
   var setsDataURL = config.setsDataURL;
   var usersDataURL = config.usersDataURL;
@@ -42,7 +42,7 @@ function SetsCtrl ($firebaseObject, config) {
   }
 
   function getSets() {
-    var cardSets = $firebaseObject(setsRef);
+    var cardSets = $firebaseArray(setsRef);
 
     return cardSets;
   }

@@ -1,5 +1,5 @@
 <section class="set-cards container" ng-if="sets">
-  <category-set class="col--md-4" ng-repeat="set in sets">
+  <category-set class="col--md-4" ng-repeat="set in sets | orderBy:'-dateadded'">
     <!-- partials/_category-set.html -->
   </category-set>
 </section>
