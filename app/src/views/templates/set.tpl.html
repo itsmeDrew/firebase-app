@@ -9,7 +9,11 @@
       {{card.cardnumber}} {{card.name}}
       <div ng-if="user">
         <!-- IF USER DOES NOT HAVE CARD -->
-        <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, card)">Add Card</button>
+        <div ng-repeat="variant in card.variants">
+          {{variant.name}}
+          <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, card)">Add Card</button>
+        </div>
+
       </div>
 
       <!-- IF USER HAS CARD -->

@@ -14,13 +14,19 @@
       <option value="uncommon">uncommon</option>
       <option value="common">common</option>
     </select>
-    <select ng-model="card.pokemon.type.one" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
+    <select
+      ng-model="card.pokemon.type.one"
+      ng-options="type.name for type in dashboard.cardTypes track by type.value">
     </select>
     <label ng-if="card.pokemon.rarity === 'rare-holo-ex'">
       MEGA
       <input ng-model="card.pokemon.mega" type="checkbox">
     </label>
-    <select ng-model="card.pokemon.type.two" ng-if="card.pokemon.rarity !== 'rare-holo-ex'" ng-options="dashboard.cardTypes.value as type.name for type in dashboard.cardTypes">
+    <select
+      ng-model="card.pokemon.type.two"
+      ng-if="card.pokemon.rarity !== 'rare-holo-ex'"
+      ng-options="type.name for type in dashboard.cardTypes track by type.value"
+    >
     </select>
   </div>
   <a class="btn" ng-if="!dashboard.cardExists"
@@ -29,8 +35,8 @@
         card.pokemon.cardnumber,
         card.set,
         card.pokemon.rarity,
-        card.pokemon.type.one,
-        card.pokemon.type.two,
+        card.pokemon.type.one.value,
+        card.pokemon.type.two.value,
         card.pokemon.mega
       )">
   submit</a>

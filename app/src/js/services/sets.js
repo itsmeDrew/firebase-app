@@ -81,9 +81,26 @@ function SetsCtrl ($firebaseArray, config) {
       slug: genSlug(name),
       rarity: rarity,
       mega: mega ||  false,
-      typeOne: typeOne || null,
-      typeTwo: typeTwo || null
-    }, callback());
+    }, function () {
+      if (typeOne) {
+        addVariantCard(set.id, _newCardRef.key(), typeOne);
+      }
+
+      if (typeTwo) {
+        addVariantCard(set.id, _newCardRef.key(), typeTwo);
+      }
+
+      callback();
+    });
+
+  }
+
+  function addVariantCard(setId, cardId, variant) {
+    var _cardRef = new Firebase(setsDataURL + '/' + setId + '/cards/' + cardId + '/variants').push();
+
+    _cardRef.set({
+      name: variant
+    });
   }
 
   function getSetBySlug(slug, callback) {
@@ -97,7 +114,6 @@ function SetsCtrl ($firebaseArray, config) {
   }
 
   function addCardToUser(set, user, newCard, userCard) {
-    console.log(user);
     if (userCard) {
       var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + userCard.id);
 
