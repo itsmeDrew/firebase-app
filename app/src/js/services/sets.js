@@ -11,18 +11,8 @@ function SetsCtrl ($firebaseArray, config) {
   var setsRef = new Firebase(setsDataURL);
 
   vm.updated = false;
-  vm.addNewCard = addNewCard;
-  vm.addNewSet = addNewSet;
-  vm.removeSet = removeSet;
-  vm.updateSetName = updateSetName;
-  vm.getSets = getSets;
-  vm.getSetBySlug = getSetBySlug;
-  vm.checkIfCardExists = checkIfCardExists;
-  vm.addCardToUser = addCardToUser;
-  vm.removeUserCard = removeUserCard;
-  vm.updateQty = updateQty;
 
-  function addNewSet(name, numberofcards, releaseDate) {
+  vm.addNewSet = function (name, numberofcards, releaseDate) {
     var _newSetRef = setsRef.push();
     var _todaysDate = Date();
 
@@ -30,25 +20,25 @@ function SetsCtrl ($firebaseArray, config) {
       name: name,
       id: _newSetRef.key(),
       numberofcards: numberofcards,
-      slug: genSlug(name),
+      slug: vm.genSlug(name),
       releasedate: releaseDate,
       dateadded: _todaysDate
     });
   }
 
-  function removeSet(set) {
+  vm.removeSet = function (set) {
     var _ref = new Firebase(setsRef + '/' + set.id );
 
     _ref.remove();
   }
 
-  function updateSetName(set, newName) {
+  vm.updateSetName = function (set, newName) {
     var _ref = new Firebase(setsRef + '/' + set.id );
 
     _ref.update({ name: newName });
   }
 
-  function genSlug(data) {
+  vm.genSlug = function (data) {
     return data
       .toLowerCase()
       .replace(/ /g,'-')
@@ -56,13 +46,13 @@ function SetsCtrl ($firebaseArray, config) {
       ;
   }
 
-  function getSets() {
+  vm.getSets = function () {
     var cardSets = $firebaseArray(setsRef);
 
     return cardSets;
   }
 
-  function checkIfCardExists(cardnumber, set, callback) {
+  vm.checkIfCardExists = function (cardnumber, set, callback) {
     var _ref = new Firebase(setsRef + '/' + set.id + '/cards' );
 
     _ref.orderByChild("cardnumber").equalTo(cardnumber).on("value", function(snapshot) {
@@ -70,7 +60,7 @@ function SetsCtrl ($firebaseArray, config) {
     });
   }
 
-  function addNewCard(name, cardnumber, set, rarity, typeOne, typeTwo, mega, callback) {
+  vm.addNewCard = function (name, cardnumber, set, rarity, typeOne, typeTwo, mega, callback) {
     var ref = new Firebase(setsDataURL + '/' + set.id + '/cards');
     var _newCardRef = ref.push();
 
@@ -95,7 +85,7 @@ function SetsCtrl ($firebaseArray, config) {
 
   }
 
-  function addVariantCard(setId, cardId, variant) {
+  vm.addVariantCard = function (setId, cardId, variant) {
     var _cardRef = new Firebase(setsDataURL + '/' + setId + '/cards/' + cardId + '/variants').push();
 
     _cardRef.set({
@@ -103,7 +93,7 @@ function SetsCtrl ($firebaseArray, config) {
     });
   }
 
-  function getSetBySlug(slug, callback) {
+  vm.getSetBySlug = function (slug, callback) {
     setsRef.orderByChild("slug").equalTo(slug).on("value", function(snapshot) {
       for (var key in snapshot.val()) {
         if (snapshot.val().hasOwnProperty(key)) {
@@ -113,7 +103,7 @@ function SetsCtrl ($firebaseArray, config) {
     });
   }
 
-  function addCardToUser(set, user, newCard, userCard) {
+  vm.addCardToUser = function (set, user, newCard, userCard) {
     if (userCard) {
       var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + userCard.id);
 
@@ -134,7 +124,7 @@ function SetsCtrl ($firebaseArray, config) {
     }
   }
 
-  function removeUserCard(set, user, userCard) {
+  vm.removeUserCard = function (set, user, userCard) {
     var _userCard = userCard;
     var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + _userCard.id);
 
@@ -147,7 +137,7 @@ function SetsCtrl ($firebaseArray, config) {
     }
   }
 
-  function updateQty(e, set, user, card, newQty, callback) {
+  vm.updateQty = function (e, set, user, card, newQty, callback) {
     var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + card.id);
     vm.updated = false;
 

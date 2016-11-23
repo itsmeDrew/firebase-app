@@ -11,13 +11,7 @@ function UsersCtrl ($firebaseAuth, config) {
   var baseAuth = $firebaseAuth(baseRef);
   var adminRef = baseRef.child("admins");
 
-  vm.authHandler = authHandler;
-  vm.checkAuth = checkAuth;
-  vm.loginWithFacebook = loginWithFacebook;
-  vm.loginWithGoogle = loginWithGoogle;
-  vm.logout = logout;
-
-  function loginWithFacebook(callback) {
+  vm.loginWithFacebook = function (callback) {
     baseAuth.$authWithOAuthPopup("facebook").then(function(authData) {
       if (authData) {
         authHandler(baseRef);
@@ -28,7 +22,7 @@ function UsersCtrl ($firebaseAuth, config) {
     });
   }
 
-  function loginWithGoogle(callback) {
+  vm.loginWithGoogle = function (callback) {
     baseAuth.$authWithOAuthPopup("google").then(function(authData) {
       if (authData) {
         authHandler(baseRef);
@@ -39,7 +33,7 @@ function UsersCtrl ($firebaseAuth, config) {
     });
   }
 
-  function authHandler(ref) {
+  vm.authHandler = function (ref) {
     var _ref = ref || baseRef;
 
     _ref.onAuth(function(authData) {
@@ -63,7 +57,7 @@ function UsersCtrl ($firebaseAuth, config) {
     });
   }
 
-  function setNewUser(userListRef , userId, authData) {
+  vm.setNewUser = function (userListRef , userId, authData) {
     adminRef.once('value', function(snapshot) {
       if (snapshot.hasChild(authData.uid)) {
         userListRef .child(userId).set({
@@ -83,7 +77,7 @@ function UsersCtrl ($firebaseAuth, config) {
     })
   }
 
-  function getName(authData) {
+  vm.getName = function (authData) {
     switch(authData.provider) {
       case 'password':
       return authData.password.email.replace(/@.*/, '');
@@ -96,7 +90,7 @@ function UsersCtrl ($firebaseAuth, config) {
     }
   }
 
-  function checkAuth(ref) {
+  vm.checkAuth = function (ref) {
     var _ref = ref || baseRef;
     var authData = _ref.getAuth();
 
@@ -105,7 +99,7 @@ function UsersCtrl ($firebaseAuth, config) {
     }
   }
 
-  function logout(ref) {
+  vm.logout = function (ref) {
     var _ref = ref || baseRef;
 
     return _ref.unauth();
