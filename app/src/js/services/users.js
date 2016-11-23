@@ -14,7 +14,7 @@ function UsersCtrl ($firebaseAuth, config) {
   vm.loginWithFacebook = function (callback) {
     baseAuth.$authWithOAuthPopup("facebook").then(function(authData) {
       if (authData) {
-        authHandler(baseRef);
+        vm.authHandler(baseRef);
         callback();
       }
     }).catch(function(error) {
@@ -25,7 +25,7 @@ function UsersCtrl ($firebaseAuth, config) {
   vm.loginWithGoogle = function (callback) {
     baseAuth.$authWithOAuthPopup("google").then(function(authData) {
       if (authData) {
-        authHandler(baseRef);
+        vm.authHandler(baseRef);
         callback();
       }
     }).catch(function(error) {
@@ -48,7 +48,7 @@ function UsersCtrl ($firebaseAuth, config) {
           var _authenticated = vm.authenticated;
 
           if (!_userExists && authData && !_authenticated) {
-            setNewUser(_userList, _userId, authData);
+            vm.setNewUser(_userList, _userId, authData);
           }
 
           vm.authenticated = true;
@@ -62,14 +62,14 @@ function UsersCtrl ($firebaseAuth, config) {
       if (snapshot.hasChild(authData.uid)) {
         userListRef .child(userId).set({
           provider: authData.provider,
-          name: getName(authData),
+          name: vm.getName(authData),
           userID: userId,
           role: 99
         });
       } else {
         userListRef .child(userId).set({
           provider: authData.provider,
-          name: getName(authData),
+          name: vm.getName(authData),
           userID: userId,
           role: 10
         });
