@@ -105,21 +105,20 @@ function SetsCtrl ($firebaseArray, config) {
 
   vm.addCardToUser = function (set, user, newCard, userCard) {
     if (userCard) {
-      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + userCard.id);
+      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + newCard.id);
 
       _userCardRef.update({
         qty: userCard.qty + 1
       });
     } else {
-      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/');
-      var _newCardRef = _userSetsRef.push();
+      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + newCard.id);
 
-      _newCardRef.set({
+      _userSetsRef.set({
         cardnumber: newCard.cardnumber,
         name: newCard.name,
         slug: newCard.slug,
         qty: 1,
-        id: _newCardRef.key()
+        id: newCard.id
       });
     }
   }
