@@ -68,16 +68,16 @@ function SetsCtrl ($firebaseArray, config) {
       name: name,
       cardnumber: cardnumber,
       id: _newCardRef.key(),
-      slug: genSlug(name),
+      slug: vm.genSlug(name),
       rarity: rarity,
       mega: mega ||  false,
     }, function () {
       if (typeOne) {
-        addVariantCard(set.id, _newCardRef.key(), typeOne);
+        vm.addVariantCard(set.id, _newCardRef.key(), typeOne);
       }
 
       if (typeTwo) {
-        addVariantCard(set.id, _newCardRef.key(), typeTwo);
+        vm.addVariantCard(set.id, _newCardRef.key(), typeTwo);
       }
 
       callback();
@@ -105,13 +105,13 @@ function SetsCtrl ($firebaseArray, config) {
 
   vm.addCardToUser = function (set, user, newCard, userCard) {
     if (userCard) {
-      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + newCard.id);
+      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + newCard.id);
 
       _userCardRef.update({
         qty: userCard.qty + 1
       });
     } else {
-      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + newCard.id);
+      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + newCard.id);
 
       _userSetsRef.set({
         cardnumber: newCard.cardnumber,
@@ -125,7 +125,7 @@ function SetsCtrl ($firebaseArray, config) {
 
   vm.removeUserCard = function (set, user, userCard) {
     var _userCard = userCard;
-    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + _userCard.id);
+    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + _userCard.id);
 
     _userCardRef.update({
       qty: _userCard.qty - 1
@@ -137,7 +137,7 @@ function SetsCtrl ($firebaseArray, config) {
   }
 
   vm.updateQty = function (e, set, user, card, newQty, callback) {
-    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.slug + '/cards/' + card.id);
+    var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + card.id);
     vm.updated = false;
 
     if (e.keyCode == 13) {
