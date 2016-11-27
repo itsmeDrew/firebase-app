@@ -12,7 +12,7 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, $firebaseObject
 
   sets.getSetBySlug($stateParams.setSlug, function(setData) {
     var _currentSet = setData;
-    var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + _currentSet.id + '/cards/' );
+    var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + _currentSet.id + '/cards/');
 
     vm.currentSet = _currentSet;
     vm.setsService = sets;
@@ -20,7 +20,7 @@ function SetsCtrl ($stateParams, $state, $scope, $firebaseArray, $firebaseObject
     vm.updateQty = updateQty;
     vm.updated = false;
 
-    console.log(vm.userCards);
+    console.log('user cards', vm.userCards);
 
     function updateQty(e, set, user, card, newQty) {
       vm.setsService.updateQty(e, set, user, card, newQty, function() {

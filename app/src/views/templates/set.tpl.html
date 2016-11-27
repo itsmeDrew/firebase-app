@@ -10,23 +10,25 @@
       <div ng-if="user">
         <!-- IF USER DOES NOT HAVE CARD -->
         <div ng-repeat="variant in card.variants">
-          {{variant.name}}
-          <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, card)">Add Card</button>
+          {{variant.name}} {{variant.id}}
+          <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, variant, card)">Add Card</button>
+
+          <!-- IF USER HAS CARD -->
+          <div
+            ng-repeat="userCard in set.userCards"
+          >
+            <div ng-repeat="userVariant in userCard.variants" ng-if="variant.id === userVariant.id" ng-init="userVariant.qty >= 1 ? card.hasCard = true : card.hasCard = false">
+              <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty($event, set.currentSet, user, userCard, updatedQty)">
+              <button ng-click="set.setsService.removeUserCard(set.currentSet, user, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
+              <button ng-click="set.setsService.addCardToUser(set.currentSet, user, card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
+            </div>
+
+          </div>
+          <!-- END IF -->
+
         </div>
 
       </div>
-
-      <!-- IF USER HAS CARD -->
-      <div
-        ng-repeat="userCard in set.userCards"
-        ng-if="card.cardnumber === userCard.cardnumber"
-        ng-init="userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false"
-      >
-          <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty($event, set.currentSet, user, userCard, updatedQty)">
-          <button ng-click="set.setsService.removeUserCard(set.currentSet, user, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
-          <button ng-click="set.setsService.addCardToUser(set.currentSet, user, card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
-      </div>
-      <!-- END IF -->
 
     </li>
   </ul>

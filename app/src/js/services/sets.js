@@ -60,6 +60,15 @@ function SetsCtrl ($firebaseArray, config) {
     });
   }
 
+  vm.checkUserHasCard = function (set, user, cardID) {
+    var _ref = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/');
+
+    _ref.orderByChild("id").equalTo(cardID).on("value", function(snapshot) {
+      console.log('user has this card already!');
+      return true;
+    });
+  }
+
   vm.addNewCard = function (name, cardnumber, set, rarity, typeOne, typeTwo, mega, callback) {
     var ref = new Firebase(setsDataURL + '/' + set.id + '/cards');
     var _newCardRef = ref.push();
@@ -89,7 +98,8 @@ function SetsCtrl ($firebaseArray, config) {
     var _cardRef = new Firebase(setsDataURL + '/' + setId + '/cards/' + cardId + '/variants').push();
 
     _cardRef.set({
-      name: variant
+      name: variant,
+      id: _cardRef.key()
     });
   }
 
@@ -103,24 +113,14 @@ function SetsCtrl ($firebaseArray, config) {
     });
   }
 
-  vm.addCardToUser = function (set, user, newCard, userCard) {
-    if (userCard) {
-      var _userCardRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + newCard.id);
+  vm.addCardToUser = function (set, user, variantCard, card) {
+    var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + card.id + '/variants');
 
-      _userCardRef.update({
-        qty: userCard.qty + 1
-      });
-    } else {
-      var _userSetsRef = new Firebase(usersDataURL + '/' + user.uid + '/sets/' + set.id + '/cards/' + newCard.id);
-
-      _userSetsRef.set({
-        cardnumber: newCard.cardnumber,
-        name: newCard.name,
-        slug: newCard.slug,
-        qty: 1,
-        id: newCard.id
-      });
-    }
+    _userSetsRef.push({
+      name: variantCard.name,
+      qty: 1,
+      id: variantCard.id
+    });
   }
 
   vm.removeUserCard = function (set, user, userCard) {
