@@ -1,38 +1,31 @@
 <h4>Setname: {{set.currentSet.name}}</h4>
 
-<div ng-if="set.currentSet.name">
+<div ng-if="set.currentSet.name && user">
   <h4>cards available</h4>
-
-
-  <ul>
-    <li ng-repeat="card in set.currentSet.cards" style="margin: 10px 0;">
-      {{card.cardnumber}} {{card.name}}
-      <div ng-if="user">
-        <!-- IF USER DOES NOT HAVE CARD -->
-        <div ng-repeat="variant in card.variants">
-          {{variant.name}} {{variant.id}}
-          <button ng-show="!card.hasCard && user" ng-click="set.setsService.addCardToUser(set.currentSet, user, variant, card)">Add Card</button>
-
-          <!-- IF USER HAS CARD -->
-          <div
-            ng-repeat="userCard in set.userCards"
-          >
-            <div ng-repeat="userVariant in userCard.variants" ng-if="variant.id === userVariant.id" ng-init="userVariant.qty >= 1 ? card.hasCard = true : card.hasCard = false">
-              <input class="" placeholder="{{ userCard.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty($event, set.currentSet, user, userCard, updatedQty)">
-              <button ng-click="set.setsService.removeUserCard(set.currentSet, user, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">-</button>
-              <button ng-click="set.setsService.addCardToUser(set.currentSet, user, card, userCard); userCard.qty >= 1 ? card.hasCard = true : card.hasCard = false">+</button>
-            </div>
-
-          </div>
-          <!-- END IF -->
-
-        </div>
-
+  <ul class="set-list">
+    <li class="set-list__card" ng-repeat="card in set.currentSet.cards" style="margin: 10px 0;">
+      <div class="set-card">
+        <span class="set-card__number">{{card.cardnumber}}</span>
+        <span class="set-card__name">{{card.name}}</span>
       </div>
+      <div class="set-variant" ng-repeat="variant in card.variants">
+        <span class="set-variant__name">{{variant.name}}</span>
+        <button class="set-variant__button" ng-show="!variant.userHasCard" ng-click="set.setsService.addCardToUser(set.currentSet, user, variant, card)">Add Card</button>
 
+        <!-- IF USER HAS VARIANT -->
+        <div ng-repeat="userCard in set.userCards">
+          <div class="set-variant__quantityForm" ng-repeat="userVariant in userCard.variants" ng-if="variant.id === userVariant.id" ng-init="userVariant.qty >= 1 ? variant.userHasCard = true : variant.userHasCard = false">
+            <input class="set-variant__input" placeholder="{{ userVariant.qty }}" type="text" ng-model="updatedQty" ng-keypress="set.updateQty($event, set.currentSet, user, userCard, updatedQty)">
+            <button class="set-variant__button" ng-click="set.setsService.removeUserCard(set.currentSet, user, userCard)">-</button>
+            <button class="set-variant__button" ng-click="set.setsService.addCardToUser(set.currentSet, user, card, userCard)">+</button>
+          </div>
+        </div>
+        <!-- END IF -->
+      </div>
     </li>
   </ul>
 </div>
+
 <div ng-if="!set.currentSet.name">
   <h2>click a set to continue!</h2>
 </div>
